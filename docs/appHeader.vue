@@ -20,8 +20,9 @@
             </v-col>
             <v-col :span="2">
                 <v-button-group size="small" class="margin-top-20">
+                    <v-button icon="home" @click="goHome"></v-button>
                     <v-button icon="scan" @click="handleShowEwm"></v-button>
-                    <v-button icon="github-fill"></v-button>
+                    <v-button icon="github-fill" @click="goGithub"></v-button>
                 </v-button-group>
             </v-col>
         </v-row>
@@ -36,7 +37,8 @@ import { menuRouter } from './router/router';
 export default {
     data() {
         return {
-            visible: false
+            visible: false,
+            github: "https://github.com/crossui/vue-cross-mobile-ui"
         }
     },
     computed: {
@@ -61,6 +63,12 @@ export default {
         },
         handleCancel() {
             this.visible = false
+        },
+        goGithub() {
+            window.location.href = this.github
+        },
+        goHome() {
+            window.location.href = 'http://www.getvcu.com'
         }
     }
 }
