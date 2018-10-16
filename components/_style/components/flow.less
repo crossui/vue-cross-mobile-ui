@@ -1,0 +1,400 @@
+@wepay-flow-prefix-cls: ~"@{vcu-prefix}-wepay-flow";
+@bubbleCorlor: #ff8a00;
+.setBubbleCommon(@height, @backgroundColor, @fontSize, @color, @borderRadius) {
+    height: @height;
+    line-height: @height+2;
+    background-color: @backgroundColor;
+    font-size: @fontSize;
+    color: @color;
+    white-space: nowrap;
+    padding: 0 6px;
+    position: relative;
+    border-radius: @borderRadius;
+    &:after {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        font-size: 0;
+        position: absolute;
+    }
+}
+
+.setBubblePrivate(@direction, @backgroundColor) when (@direction =top) {
+    &:after {
+        border-color: @backgroundColor transparent transparent transparent;
+        border-style: solid;
+        border-width: 5px 3px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        bottom: -10px;
+    }
+}
+
+.setBubblePrivate(@direction, @backgroundColor) when (@direction =bottom) {
+    &:after {
+        border-color: transparent transparent @backgroundColor transparent;
+        border-style: dashed dashed solid dashed;
+        border-width: 5px 3px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        top: -10px;
+    }
+}
+
+.setBubblePrivate(@direction, @backgroundColor) when (@direction =left) {
+    &:after {
+        border-color: transparent transparent transparent @backgroundColor;
+        border-style: solid;
+        border-width: 3px 5px;
+        top: 50%;
+        transform: translate(0, -50%);
+        right: -10px;
+    }
+}
+
+.setBubblePrivate(@direction, @backgroundColor) when (@direction =right) {
+    &:after {
+        border-color: transparent @backgroundColor transparent transparent;
+        border-style: solid;
+        border-width: 3px 5px;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: -10px;
+    }
+}
+
+.@{wepay-flow-prefix-cls},
+.@{wepay-flow-prefix-cls}-auto {
+    padding: 40px;
+}
+
+.@{wepay-flow-prefix-cls}__bd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.@{wepay-flow-prefix-cls}__li {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    z-index: 1;
+    .@{wepay-flow-prefix-cls}__state {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        line-height: 18px;
+        text-align: center;
+        color: #FFF;
+        border-radius: 99px;
+        box-sizing: border-box;
+    }
+}
+
+.@{wepay-flow-prefix-cls}__state {
+    background-color: #E2E2E2;
+    .@{wepay-flow-prefix-cls}__li_done & {
+        background-color: @theme-color;
+    }
+}
+
+[class^="vcu-wepay-flow__title-"],
+[class*=" vcu-wepay-flow__title-"] {
+    position: absolute;
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.@{wepay-flow-prefix-cls}__title-top {
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    .@{wepay-flow-prefix-cls}__li_done & {
+        color: #333;
+    }
+}
+
+.@{wepay-flow-prefix-cls}__title-bottom {
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    .@{wepay-flow-prefix-cls}__li_done & {
+        color: #333;
+    }
+}
+
+.@{wepay-flow-prefix-cls}__title-left {
+    right: 30px;
+    top: 50%;
+    transform: translate(0, -50%);
+    .@{wepay-flow-prefix-cls}__li_done & {
+        color: #333;
+    }
+    text-align: right;
+}
+
+.@{wepay-flow-prefix-cls}__title-right {
+    left: 30px;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: left;
+    .@{wepay-flow-prefix-cls}__li_done & {
+        color: #333;
+    }
+}
+
+[class^="vcu-wepay-flow__intro-"],
+[class*=" vcu-wepay-flow__intro-"] {
+    .setBubbleCommon(20px, @bubbleCorlor, 10px, #FFF, 4px);
+}
+
+.@{wepay-flow-prefix-cls}__intro-top {
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    .setBubblePrivate(top, @bubbleCorlor);
+    position: absolute;
+}
+
+.@{wepay-flow-prefix-cls}__intro-bottom {
+    top: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    .setBubblePrivate(bottom, @bubbleCorlor);
+    position: absolute;
+}
+
+.@{wepay-flow-prefix-cls}__intro-right {
+    left: 36px;
+    top: 50%;
+    transform: translate(0, -50%);
+    .setBubblePrivate(right, @bubbleCorlor);
+    position: absolute;
+}
+
+.@{wepay-flow-prefix-cls}__intro-left {
+    right: 36px;
+    top: 50%;
+    transform: translate(0, -50%);
+    .setBubblePrivate(left, @bubbleCorlor);
+    position: absolute;
+}
+
+[class^="vcu-wepay-flow__info-"] {
+    .setBubbleCommon(16px, @theme-color, 10px, #FFF, 2px);
+    position: absolute;
+    .@{wepay-flow-prefix-cls}__line_ing & {
+        display: block;
+    }
+}
+
+.@{wepay-flow-prefix-cls}__info-top {
+    display: none;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 11px;
+    .@{wepay-flow-prefix-cls}__line_ing & {
+        display: block;
+    }
+    .setBubblePrivate(top, @theme-color);
+}
+
+.@{wepay-flow-prefix-cls}__info-bottom {
+    display: none;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 11px;
+    .@{wepay-flow-prefix-cls}__line_ing & {
+        display: block;
+    }
+    .setBubblePrivate(bottom, @theme-color);
+}
+
+.@{wepay-flow-prefix-cls}__info-left {
+    display: none;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 12px;
+    .@{wepay-flow-prefix-cls}__line_ing & {
+        display: block;
+    }
+    .setBubblePrivate(left, @theme-color);
+}
+
+.@{wepay-flow-prefix-cls}__info-right {
+    display: none;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 12px;
+    .@{wepay-flow-prefix-cls}__line_ing & {
+        display: block;
+    }
+    .setBubblePrivate(right, @theme-color);
+}
+
+.@{wepay-flow-prefix-cls}__line {
+    flex: 1;
+    background-color: #E2E2E2;
+    height: 3px;
+    position: relative;
+}
+
+.@{wepay-flow-prefix-cls}__title {
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.@{wepay-flow-prefix-cls}__info {
+    color: #999999;
+    font-size: 12px;
+}
+
+.@{wepay-flow-prefix-cls}__process {
+    display: none;
+    background-color: @theme-color;
+    height: 3px;
+    position: relative;
+    .@{wepay-flow-prefix-cls}__line_ing & {
+        display: block;
+        width: 50%;
+    }
+    .@{wepay-flow-prefix-cls}__line_done & {
+        display: block;
+    }
+}
+
+.@{wepay-flow-prefix-cls}_custom {
+    .@{wepay-flow-prefix-cls}__bd {
+        justify-content: flex-start;
+    }
+    .@{wepay-flow-prefix-cls}__line {
+        flex: none;
+        width: 100px;
+    }
+}
+
+.@{wepay-flow-prefix-cls}_vertical {
+    .@{wepay-flow-prefix-cls}__bd {
+        flex-direction: column;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    .@{wepay-flow-prefix-cls}__line {
+        height: auto;
+        width: 3px;
+    }
+    .@{wepay-flow-prefix-cls}__line_ing {
+        .@{wepay-flow-prefix-cls}__process {
+            height: 50%;
+        }
+    }
+    .@{wepay-flow-prefix-cls}__process {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+    }
+    .@{wepay-flow-prefix-cls}__line_done {
+        .@{wepay-flow-prefix-cls}__process {
+            height: 100%;
+        }
+    }
+}
+
+.@{wepay-flow-prefix-cls}_vertical-custom {
+    .@{wepay-flow-prefix-cls}__bd {
+        flex-direction: column;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    .@{wepay-flow-prefix-cls}__line {
+        width: 3px;
+        flex: none;
+    }
+    .@{wepay-flow-prefix-cls}__line_ing {
+        .@{wepay-flow-prefix-cls}__process {
+            height: 50%;
+        }
+    }
+    .@{wepay-flow-prefix-cls}__process {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+    }
+    .@{wepay-flow-prefix-cls}__line_done {
+        .@{wepay-flow-prefix-cls}__process {
+            height: 100%;
+        }
+    }
+}
+
+.@{wepay-flow-prefix-cls}-auto {
+    position: relative;
+}
+
+.@{wepay-flow-prefix-cls}-auto__bd {
+    position: relative;
+}
+
+.@{wepay-flow-prefix-cls}-auto__state {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 7px;
+    background-color: #E2E2E2;
+    z-index: 2;
+}
+
+.@{wepay-flow-prefix-cls}-auto__state_on {
+    background-color: @theme-color;
+}
+
+.@{wepay-flow-prefix-cls}-auto__line {
+    position: absolute;
+    z-index: 1;
+    width: 2px;
+    background-color: #dddddd;
+    top: 10px;
+    bottom: -4px;
+    left: 6px;
+    z-index: 1;
+}
+
+.@{wepay-flow-prefix-cls}-auto__line_on {
+    background-color: @theme-color;
+}
+
+.@{wepay-flow-prefix-cls}-auto__li {
+    position: relative;
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+
+.@{wepay-flow-prefix-cls}-auto__title {
+    color: #999999;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.@{wepay-flow-prefix-cls}-auto__info {
+    color: #999999;
+    font-size: 12px;
+}

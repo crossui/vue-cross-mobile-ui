@@ -1,0 +1,107 @@
+@cellform-prefix-cls: ~"@{vcu-prefix}-form";
+.@{cellform-prefix-cls}-preview {
+    position: relative;
+    background-color: #FFFFFF;
+    &:before {
+        .setTopLine(@cell-border-color);
+    }
+    &:after {
+        .setBottomLine(@cell-border-color);
+    }
+}
+
+.@{cellform-prefix-cls}-preview__hd {
+    position: relative;
+    padding: @cell-gapV @cell-gapH;
+    text-align: right;
+    line-height: 2.5em;
+    &:after {
+        .setBottomLine(@cell-border-color);
+        left: @cell-gapH;
+    }
+    .@{cellform-prefix-cls}-preview__value {
+        font-style: normal;
+        font-size: 1.6em;
+    }
+}
+
+.@{cellform-prefix-cls}-preview__bd {
+    padding: @cell-gapV @cell-gapH;
+    font-size: .9em;
+    text-align: right;
+    color: @textColorGray;
+    line-height: 2;
+}
+
+.@{cellform-prefix-cls}-preview__ft {
+    position: relative;
+    line-height: 50px;
+    display: flex;
+    &:after {
+        .setTopLine(@DialogLineColor);
+    }
+}
+
+.@{cellform-prefix-cls}-preview__item {
+    overflow: hidden;
+}
+
+.@{cellform-prefix-cls}-preview__label {
+    float: left;
+    margin-right: 1em;
+    min-width: 4em;
+    color: @textColorGray;
+    text-align: justify;
+    text-align-last: justify;
+}
+
+.@{cellform-prefix-cls}-preview__value {
+    display: block;
+    overflow: hidden;
+    word-break: normal;
+    word-wrap: break-word;
+}
+
+.@{cellform-prefix-cls}-preview__btn {
+    position: relative;
+    display: block;
+    flex: 1;
+    color: @DialogLinkColor;
+    text-align: center;
+    .setTapColor();
+    button& {
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+        line-height: inherit;
+        font-size: inherit;
+    }
+    &:active {
+        background-color: @DialogLinkActiveBc;
+    }
+    &:after {
+        .setLeftLine(@DialogLineColor);
+    }
+    &:first-child {
+        &:after {
+            display: none;
+        }
+    }
+}
+
+.@{cellform-prefix-cls}-preview__btn_default {
+    color: @textColorGray;
+}
+
+.@{cellform-prefix-cls}-preview__btn_primary {
+    color: @form-preview-button-primary-color;
+}
+
+.@{vcu-prefix}-cell-form-preview .@{cellform-prefix-cls}-preview__bd {
+    width: 100%;
+    padding: 0;
+}
+
+.@{vcu-prefix}-form-preview {
+    overflow: hidden;
+}

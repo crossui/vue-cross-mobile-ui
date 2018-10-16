@@ -1,0 +1,60 @@
+@input-prefix-cls: ~"@{vcu-prefix}-input";
+.@{input-prefix-cls}-wrap .@{input-prefix-cls}-placeholder-right input::-webkit-input-placeholder {
+    text-align: right;
+}
+
+.@{input-prefix-cls}-wrap .@{input-prefix-cls}-placeholder-center input::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.@{input-prefix-cls}-wrap .@{input-prefix-cls}-icon {
+    font-size: 21px;
+}
+
+.@{input-prefix-cls}-icon.@{vcu-prefix}icon-roundcheckfill {
+    color: @theme-color;
+}
+
+.@{input-prefix-cls}-icon.@{vcu-prefix}icon-warnfill {
+    color: red;
+}
+
+.@{input-prefix-cls}-icon.@{vcu-prefix}icon-warnfill:before,
+.@{input-prefix-cls}-icon.@{vcu-prefix}icon-roundcheckfill:before {
+    font-size: 21px;
+}
+
+.@{input-prefix-cls}-wrap .@{vcu-prefix}-icon {
+    padding-left: 5px;
+}
+
+.@{input-prefix-cls}-wrap.@{vcu-prefix}-cell_vcode {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.@{input-prefix-cls}-wrap.disabled {
+    .@{vcu-prefix}-input {
+        text-fill-color: #888;
+        -webkit-text-fill-color: #888;
+        /* Override iOS / Android font color change */
+        opacity: 1;
+        /* Override iOS opacity change affecting text & background color */
+    }
+}
+
+.@{input-prefix-cls}-right-full {
+    margin-left: 5px;
+    height: @cell-height;
+    vertical-align: middle;
+    & img {
+        height: @cell-height;
+    }
+}
+
+.@{input-prefix-cls}-has-right-full {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}

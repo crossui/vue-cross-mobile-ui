@@ -1,0 +1,56 @@
+@swipeout-prefix-cls: ~"@{vcu-prefix}-swipeout";
+.@{swipeout-prefix-cls} {
+    width: 100%;
+    overflow: hidden;
+}
+
+.@{swipeout-prefix-cls}-item {
+    position: relative;
+}
+
+.@{swipeout-prefix-cls}-button-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-size: 0;
+    text-align: right;
+}
+
+.@{swipeout-prefix-cls}-button-box-left {
+    text-align: left;
+}
+
+.@{swipeout-prefix-cls}-button-box>div {
+    height: 100%;
+}
+
+.@{swipeout-prefix-cls}-button {
+    height: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: @swipeout-button-font-color;
+    border: none;
+}
+
+.@{swipeout-prefix-cls}-content {
+    position: relative;
+    background: @swipeout-content-bg-color;
+}
+
+.@{swipeout-prefix-cls}-content.@{swipeout-prefix-cls}-content-animated {
+    transition: transform 0.2s;
+}
+
+.@{swipeout-prefix-cls}-button-primary {
+    background-color: @swipeout-button-primary-bg-color;
+}
+
+.@{swipeout-prefix-cls}-button-warn {
+    background-color: @swipeout-button-warn-bg-color;
+}
+
+.@{swipeout-prefix-cls}-button-default {
+    background-color: @swipeout-button-default-bg-color;
+}

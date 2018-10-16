@@ -1,0 +1,56 @@
+/** env = windows **/
+
+html {
+    -webkit-tap-highlight-color: transparent;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    line-height: 1.6;
+    font-family: @fontDefault;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+input,
+button,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+a img {
+    border: 0;
+}
+
+a {
+    -webkit-touch-callout: none;
+    text-decoration: none;
+    .setTapColor();
+}
+
+::-webkit-input-placeholder {
+    font-family: @fontDefault;
+}
+
+.clearfix {
+    .clearfix();
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}

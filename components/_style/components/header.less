@@ -1,0 +1,127 @@
+@header-prefix-cls: ~"@{vcu-prefix}-header";
+.@{header-prefix-cls} {
+    position: relative;
+    padding: 3px 0;
+    box-sizing: border-box;
+    background-color: @header-background-color;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-title {
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    color: @header-title-color;
+}
+
+.@{header-prefix-cls}-title-area,
+.@{header-prefix-cls} .@{header-prefix-cls}-title {
+    margin: 0 88px;
+    height: 40px;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-title>span {
+    display: inline-block;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-left,
+.@{header-prefix-cls} .@{header-prefix-cls}-right {
+    position: absolute;
+    top: 14px;
+    display: block;
+    font-size: 14px;
+    line-height: 21px;
+    color: @header-text-color;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-left a,
+.@{header-prefix-cls} .@{header-prefix-cls}-left button,
+.@{header-prefix-cls} .@{header-prefix-cls}-right a,
+.@{header-prefix-cls} .@{header-prefix-cls}-right button {
+    float: left;
+    margin-right: 8px;
+    color: @header-text-color;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-left a:active,
+.@{header-prefix-cls} .@{header-prefix-cls}-left button:active,
+.@{header-prefix-cls} .@{header-prefix-cls}-right a:active,
+.@{header-prefix-cls} .@{header-prefix-cls}-right button:active {
+    opacity: 0.5;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-left {
+    left: 18px;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-left .@{header-prefix-cls}-back {
+    padding-left: 16px;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-left .left-arrow {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -5px;
+    left: -5px;
+    &:before {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border: 1px solid @header-arrow-color;
+        border-width: 1px 0 0 1px;
+        transform: rotate(315deg);
+        top: 8px;
+        left: 7px;
+    }
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-right {
+    right: 15px;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-right a,
+.@{header-prefix-cls} .@{header-prefix-cls}-right button {
+    margin-left: 8px;
+    margin-right: 0;
+}
+
+.@{header-prefix-cls} .@{header-prefix-cls}-right .@{header-prefix-cls}-more:after {
+    content: "\2022\0020\2022\0020\2022\0020";
+    font-size: 16px;
+}
+
+.@{header-prefix-cls}-fade-in-right-enter-active {
+    animation: fadeinR 0.5s;
+}
+
+.@{header-prefix-cls}-fade-in-left-enter-active {
+    animation: fadeinL 0.5s;
+}
+
+@keyframes fadeinR {
+    0% {
+        opacity: 0;
+        transform: translateX(150px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeinL {
+    0% {
+        opacity: 0;
+        transform: translateX(-150px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

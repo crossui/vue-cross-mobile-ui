@@ -1,0 +1,47 @@
+@header-height: 64px;
+@menu-item-border: 2px;
+#header {
+    transition: all 0.3s;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+}
+
+#logo {
+    overflow: hidden;
+    padding-left: 40px;
+    float: left;
+    height: @header-height;
+    line-height: @header-height;
+    text-decoration: none;
+    white-space: nowrap;
+    img {
+        height: 32px;
+        margin-right: 16px;
+    }
+    span {
+        color: black;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
+#header-search-box {
+    float: left;
+    height: 22px;
+    line-height: 22px;
+    padding-left: 16px;
+    margin: 22px auto 0;
+}
+
+#header-search-box .vcuicon {
+    color: #ced4d9;
+    position: relative;
+    top: 0.5px;
+}
+
+#header-search-box .vcu-select-selection {
+    border: 0;
+}

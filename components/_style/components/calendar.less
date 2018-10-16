@@ -1,0 +1,8 @@
+@calendar-prefix-cls: ~"@{vcu-prefix}-calendar";
+.@{calendar-prefix-cls} {
+    position: relative;
+    &:before {
+        .setTopLine(@cell-border-color);
+        left: @cell-gapH;
+    }
+}

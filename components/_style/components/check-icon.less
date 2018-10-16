@@ -1,0 +1,20 @@
+@check-icon-prefix-cls: ~"@{vcu-prefix}-check-icon";
+.@{check-icon-prefix-cls} {
+    display: inline-block;
+}
+
+.@{check-icon-prefix-cls}>span {
+    line-height: 23px;
+    color: #222;
+    vertical-align: middle;
+}
+
+.@{check-icon-prefix-cls}>.@{vcu-prefix}icon {
+    font-size: 23px;
+    color: #c9c9c9;
+}
+
+.@{check-icon-prefix-cls}>.@{vcu-prefix}icon-roundcheck:before,
+.@{check-icon-prefix-cls}>.@{vcu-prefix}icon-roundcheckfill:before {
+    color: @check-icon-color-checked;
+}

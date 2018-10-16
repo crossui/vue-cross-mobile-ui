@@ -1,0 +1,16 @@
+@checklist-prefix-cls: ~"@{vcu-prefix}-checklist";
+.@{vcu-prefix}-cells_checkbox .@{vcu-prefix}-check:checked+.@{checklist-prefix-cls}-icon-checked:before {
+    color: @checklist-icon-active-color;
+}
+
+.@{vcu-prefix}-cells_checkbox>label>* {
+    pointer-events: none;
+}
+
+.@{checklist-prefix-cls}-disabled .@{checklist-prefix-cls}-icon-checked:before {
+    opacity: 0.5;
+}
+
+.@{checklist-prefix-cls}-label-left {
+    flex-direction: row-reverse;
+}

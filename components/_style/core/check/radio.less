@@ -1,0 +1,22 @@
+// method2 accessbility
+.@{vcu-prefix}-cells_radio {
+    .@{vcu-prefix}-cell__ft {
+        padding-left: @cell-inner-gapH;
+    }
+}
+
+.@{vcu-prefix}-check {
+    // radio
+    .@{vcu-prefix}-cells_radio & {
+        &:checked {
+            &+.@{vcu-prefix}-icon-checked {
+                &:before {
+                    display: block;
+                    content: '\E656';
+                    color: @radio-checked-icon-color;
+                    font-size: 23px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+@spinner-prefix-cls: ~"@{vcu-prefix}-spinner";
+.@{spinner-prefix-cls} {
+    stroke: #444;
+    fill: #444;
+    vertical-align: middle;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+}
+
+.@{spinner-prefix-cls} svg {
+    width: 28px;
+    height: 28px;
+}
+
+.@{spinner-prefix-cls}.@{spinner-prefix-cls}-inverse {
+    stroke: #fff;
+    fill: #fff;
+}
+
+.@{spinner-prefix-cls}-android {
+    stroke: #4b8bf4;
+}
+
+.@{spinner-prefix-cls}-ios,
+.@{spinner-prefix-cls}-ios-small {
+    stroke: #69717d;
+}
+
+.@{spinner-prefix-cls}-spiral .stop1 {
+    stop-color: #fff;
+    stop-opacity: 0;
+}
+
+.@{spinner-prefix-cls}-spiral.@{spinner-prefix-cls}-inverse .stop1 {
+    stop-color: #000;
+}
+
+.@{spinner-prefix-cls}-spiral.@{spinner-prefix-cls}-inverse .stop2 {
+    stop-color: #fff;
+}

@@ -1,0 +1,64 @@
+.@{vcu-prefix}-fade-enter-active,
+.@{vcu-prefix}-fade-leave-active {
+    opacity: 1;
+    transition: opacity linear 0.2s;
+}
+
+.@{vcu-prefix}-fade-enter,
+.@{vcu-prefix}-fade-leave-to {
+    opacity: 0;
+}
+
+.@{vcu-prefix}-dialog-enter-active {
+    animation: vcu-dialog-in .5s;
+}
+
+.@{vcu-prefix}-dialog-leave-active {
+    animation: vcu-dialog-out .3s;
+}
+
+@keyframes vcu-dialog-in {
+    0% {
+        transform: scale(1.185);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes vcu-dialog-out {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+}
+
+.@{vcu-prefix}-mask-enter,
+.@{vcu-prefix}-mask-leave-active {
+    opacity: 0;
+}
+
+.@{vcu-prefix}-mask-leave-active,
+.@{vcu-prefix}-mask-enter-active {
+    transition: opacity 300ms !important;
+}
+
+.@{vcu-prefix}-modal-transition {
+    transition: all 0.3s ease;
+}
+
+.@{vcu-prefix}-modal-enter-active,
+.@{vcu-prefix}-modal-leave-active {
+    transition: opacity 0.5s;
+}
+
+.@{vcu-prefix}-modal-enter,
+.@{vcu-prefix}-modal-leave-to {
+    opacity: 0;
+}

@@ -1,0 +1,81 @@
+.@{vcu-prefix}-label {
+    display: block;
+    width: @cell-label-width;
+    .text_wrap();
+}
+
+.@{vcu-prefix}-input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-size: inherit;
+    color: inherit;
+    height: unit(@cell-line-height, em);
+    line-height: @cell-line-height; // hides the spin-button
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.@{vcu-prefix}-textarea {
+    display: block;
+    border: 0;
+    resize: none;
+    width: 100%;
+    color: inherit;
+    font-size: 1em;
+    line-height: inherit;
+    outline: 0;
+}
+
+.@{vcu-prefix}-textarea-counter {
+    color: @textColorTips;
+    text-align: right;
+    .@{vcu-prefix}-cell_warn & {
+        color: @textColorWarn;
+    }
+}
+
+.@{vcu-prefix}-toptips {
+    display: none;
+    position: fixed;
+    transform: translateZ(0);
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+    color: #FFF;
+    z-index: 5000;
+    .text_wrap();
+}
+
+.@{vcu-prefix}-toptips_warn {
+    background-color: @textColorWarn;
+}
+
+.@{vcu-prefix}-cells_form {
+    .@{vcu-prefix}-cell__ft {
+        font-size: 0;
+    }
+    .@{vcu-prefix}-icon-warn {
+        display: none;
+    }
+    input,
+    textarea,
+    label[for] {
+        .setTapColor();
+    }
+}
+
+.@{vcu-prefix}-cell_warn {
+    color: @textColorWarn;
+    .@{vcu-prefix}-icon-warn {
+        display: inline-block;
+    }
+}

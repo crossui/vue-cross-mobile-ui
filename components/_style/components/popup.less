@@ -1,0 +1,78 @@
+@popup-prefix-cls: ~"@{vcu-prefix}-popup";
+.@{popup-prefix-cls}-dialog {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: @popup-background-color;
+    z-index: 501;
+    transition-property: transform;
+    transition-duration: 300ms;
+    max-height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.@{popup-prefix-cls}-dialog.@{popup-prefix-cls}-left {
+    width: auto;
+    height: 100%;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+}
+
+.@{popup-prefix-cls}-dialog.@{popup-prefix-cls}-right {
+    width: auto;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+}
+
+.@{popup-prefix-cls}-dialog.@{popup-prefix-cls}-top {
+    width: 100%;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+}
+
+.@{popup-prefix-cls}-mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    tap-highlight-color: rgba(0, 0, 0, 0);
+    z-index: -1;
+    transition: opacity 400ms;
+}
+
+.@{popup-prefix-cls}-mask.@{popup-prefix-cls}-show {
+    opacity: 1;
+}
+
+.@{popup-prefix-cls}-animate-bottom-enter,
+.@{popup-prefix-cls}-animate-bottom-leave-active {
+    transform: translate3d(0, 100%, 0);
+}
+
+.@{popup-prefix-cls}-animate-left-enter,
+.@{popup-prefix-cls}-animate-left-leave-active {
+    transform: translate3d(-100%, 0, 0);
+}
+
+.@{popup-prefix-cls}-animate-right-enter,
+.@{popup-prefix-cls}-animate-right-leave-active {
+    transform: translate3d(100%, 0, 0);
+}
+
+.@{popup-prefix-cls}-animate-top-enter,
+.@{popup-prefix-cls}-animate-top-leave-active {
+    transform: translate3d(0, -100%, 0);
+}

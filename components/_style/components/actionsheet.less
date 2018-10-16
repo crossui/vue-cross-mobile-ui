@@ -1,0 +1,112 @@
+@actionsheet-prefix-cls: ~"@{vcu-prefix}-actionsheet";
+@actionSheetAndroidBorderRadius: 2px;
+.@{actionsheet-prefix-cls} {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    transform: translate(0, 100%);
+    backface-visibility: hidden;
+    z-index: 5000;
+    width: 100%;
+    background-color: @bgColorDefault; //slide up animation
+    transition: transform .3s;
+}
+
+.@{actionsheet-prefix-cls}__menu {
+    background-color: #FFFFFF;
+}
+
+.@{actionsheet-prefix-cls}__action {
+    margin-top: 6px;
+    background-color: #FFFFFF;
+}
+
+.@{actionsheet-prefix-cls}__cell {
+    position: relative;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+    &:before {
+        .setTopLine(@cell-border-color);
+    }
+    &:active {
+        background-color: @bgColorActive;
+    }
+    &:first-child {
+        &:before {
+            display: none;
+        }
+    }
+}
+
+//android actionSheet
+.@{vcu-prefix}-skin_android {
+    .@{actionsheet-prefix-cls} {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%); //padding: 0 40px;
+        width: 274px;
+        box-sizing: border-box;
+        backface-visibility: hidden;
+        background: transparent; //slide up animation
+        transition: transform .3s;
+    }
+    .@{actionsheet-prefix-cls}__action {
+        display: none;
+    }
+    .@{actionsheet-prefix-cls}__menu {
+        border-radius: @actionSheetAndroidBorderRadius;
+        box-shadow: 0 6px 30px 0 rgba(0, 0, 0, .1);
+    }
+    .@{actionsheet-prefix-cls}__cell {
+        padding: 13px 24px;
+        font-size: 16px;
+        line-height: 1.4;
+        text-align: left;
+        &:first-child {
+            border-top-left-radius: @actionSheetAndroidBorderRadius;
+            border-top-right-radius: @actionSheetAndroidBorderRadius;
+        }
+        &:last-child {
+            border-bottom-left-radius: @actionSheetAndroidBorderRadius;
+            border-bottom-right-radius: @actionSheetAndroidBorderRadius;
+        }
+    }
+}
+
+//actionSheet aniamtion
+.@{actionsheet-prefix-cls}_toggle {
+    transform: translate(0, 0);
+}
+
+.@{actionsheet-prefix-cls}-menu-primary {
+    color: @actionsheet-label-primary-color;
+}
+
+.@{actionsheet-prefix-cls}-menu-warn {
+    color: @actionsheet-label-warn-color;
+}
+
+.@{actionsheet-prefix-cls}-menu-default {
+    color: @actionsheet-label-default-color;
+}
+
+.@{actionsheet-prefix-cls}-menu-disabled {
+    color: @actionsheet-label-disabled-color;
+}
+
+.@{actionsheet-prefix-cls}-mask-enter,
+.@{actionsheet-prefix-cls}-mask-leave-active,
+.@{vcu-prefix}-android-actionsheet-enter,
+.@{vcu-prefix}-android-actionsheet-leave-active {
+    opacity: 0;
+}
+
+.@{actionsheet-prefix-cls}-mask-leave-active,
+.@{actionsheet-prefix-cls}-mask-enter-active,
+.@{vcu-prefix}-android-actionsheet-leave-active,
+.@{vcu-prefix}-android-actionsheet-enter-active {
+    transition: opacity 300ms !important;
+}

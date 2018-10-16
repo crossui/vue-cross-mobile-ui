@@ -1,0 +1,28 @@
+.@{vcu-prefix}-cells_checkbox {
+    .@{vcu-prefix}-cell__hd {
+        padding-right: @cell-inner-gapH;
+    }
+    .@{vcu-prefix}-icon-checked {
+        &:before {
+            content: '\E6D7';
+            color: #C9C9C9;
+            font-size: 23px;
+            display: block;
+        }
+    }
+}
+
+// method2 accessbility
+.@{vcu-prefix}-check {
+    // checkbox
+    .@{vcu-prefix}-cells_checkbox & {
+        &:checked {
+            &+.@{vcu-prefix}-icon-checked {
+                &:before {
+                    content: '\E656';
+                    color: #09BB07;
+                }
+            }
+        }
+    }
+}

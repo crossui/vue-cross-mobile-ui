@@ -1,0 +1,67 @@
+@msg-prefix-cls: ~"@{vcu-prefix}-msg";
+.@{msg-prefix-cls} {
+    padding-top: @MsgPaddingTop;
+    text-align: center;
+    .@{vcu-prefix}-icon_msg {
+        font-size: 93px;
+        &.@{vcu-prefix}icon-roundcheckfill {
+            color: @theme-color;
+        }
+        &.@{vcu-prefix}icon-warn {
+            color: #F76260;
+        }
+        &.@{vcu-prefix}icon-info {
+            color: #10AEFF;
+        }
+        &.@{vcu-prefix}icon-time {
+            color: #10AEFF;
+        }
+    }
+}
+
+.@{msg-prefix-cls}__icon-area {
+    margin-bottom: @MsgIconGap;
+}
+
+.@{msg-prefix-cls}__text-area {
+    margin-bottom: @MsgTextGap;
+    padding: 0 20px;
+}
+
+.@{msg-prefix-cls}__text-area a {
+    color: @linkColorDefault;
+}
+
+.@{msg-prefix-cls}__title {
+    margin-bottom: @MsgTitleGap;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.@{msg-prefix-cls}__desc {
+    font-size: 14px;
+    color: @textColorGray;
+}
+
+.@{msg-prefix-cls}__opr-area {
+    margin-bottom: @MsgOprGap;
+}
+
+.@{msg-prefix-cls}__extra-area {
+    margin-bottom: @MsgExtraAreaGap;
+    font-size: 14px;
+    color: @textColorGray;
+    a {
+        color: @linkColorDefault;
+    }
+}
+
+@media screen and (min-height: @MsgExtraAreaOfMinHeight) {
+    .@{msg-prefix-cls}__extra-area {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,27 @@
+@panel-prefix-cls: ~"@{vcu-prefix}-panel";
+.@{panel-prefix-cls} {
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    &:first-child {
+        margin-top: 0;
+    }
+    position: relative;
+    overflow: hidden;
+    &:before {
+        .setTopLine(@lineColorLight);
+    }
+    &:after {
+        .setBottomLine(@lineColorLight);
+    }
+}
+
+.@{panel-prefix-cls}__hd {
+    padding: 14px 15px 10px;
+    color: @textColorGray;
+    font-size: 13px;
+    position: relative;
+    &:after {
+        .setBottomLine(@lineColorLight);
+        left: 15px;
+    }
+}

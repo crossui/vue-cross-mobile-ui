@@ -1,0 +1,97 @@
+@step-prefix-cls: ~"@{vcu-prefix}-step";
+.@{step-prefix-cls} {
+    display: flex;
+}
+
+.@{step-prefix-cls}-item {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.@{step-prefix-cls}-item-with-tail {
+    flex: 1;
+}
+
+.@{step-prefix-cls}-item-tail {
+    height: 1px;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    padding: 0 0;
+    transition: all 0.4s ease 0s;
+}
+
+.@{step-prefix-cls}-item-tail-finish {
+    background: #09bb07 none repeat scroll 0 0;
+}
+
+.@{step-prefix-cls}-item-tail-process,
+.@{step-prefix-cls}-item-tail-wait {
+    background: #CCC none repeat scroll 0 0;
+}
+
+.@{step-prefix-cls}-item-icon {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    text-align: center;
+}
+
+.@{step-prefix-cls}-item-checked::before {
+    font-size: 15px !important;
+    line-height: 24px;
+    margin: 0 !important;
+    position: relative;
+    top: 2px;
+    transform: translateY(-4px);
+}
+
+.@{step-prefix-cls}-item-title {
+    font-size: 0.8rem;
+}
+
+.@{step-prefix-cls}-item-head {
+    position: relative;
+    display: inline-block;
+    margin-right: -4px;
+    .@{step-prefix-cls}-item-head-inner {
+        width: 24px;
+        height: 24px;
+        line-height: 22px;
+        border-radius: 99px;
+        text-align: center;
+        font-size: 14px;
+        transition: all 0.4s ease 0s;
+        background: #fff none repeat scroll 0 0;
+    }
+}
+
+.@{step-prefix-cls}-item-head-finish .@{step-prefix-cls}-item-head-inner {
+    border: 1px solid #09bb07;
+    color: #09bb07;
+}
+
+.@{step-prefix-cls}-item-head-process .@{step-prefix-cls}-item-head-inner {
+    border: 1px solid #09bb07;
+    color: #FFF;
+    background: #09bb07 none repeat scroll 0 0;
+}
+
+.@{step-prefix-cls}-item-head-wait .@{step-prefix-cls}-item-head-inner {
+    border: 1px solid #888;
+    color: #888;
+}
+
+.@{step-prefix-cls}-item-main {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    color: #888;
+    padding-left: 5px;
+}
+
+.@{step-prefix-cls}-item-main-process {
+    font-weight: bold;
+    color: #666;
+}

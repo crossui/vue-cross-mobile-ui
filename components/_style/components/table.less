@@ -1,0 +1,80 @@
+@table-prefix-cls: ~"@{vcu-prefix}-table";
+.@{table-prefix-cls} {
+    line-height: 40px;
+    position: relative;
+    width: 100%;
+    border-collapse: collapse;
+    &:after {
+        .setTopLine();
+    }
+    th {
+        font-weight: 500;
+    }
+}
+
+.@{table-prefix-cls}.@{table-prefix-cls}-bordered {
+    &:before {
+        .setLeftLine();
+    }
+}
+
+.@{table-prefix-cls} td,
+.@{table-prefix-cls} th {
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.@{table-prefix-cls} td,
+.@{table-prefix-cls} th {
+    position: relative;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.@{table-prefix-cls} td,
+.@{table-prefix-cls} th {
+    &:before {
+        .setBottomLine();
+    }
+}
+
+.@{table-prefix-cls}.@{table-prefix-cls}-no-content-bordered td {
+    &:before {
+        border-bottom-width: 0;
+    }
+}
+
+.@{table-prefix-cls}.@{table-prefix-cls}-no-content-bordered tr:last-child td {
+    &:before {
+        border-bottom-width: 1px;
+    }
+}
+
+.@{table-prefix-cls} td,
+.@{table-prefix-cls} th {
+    &:after {
+        .setRightLine();
+    }
+}
+
+.@{table-prefix-cls}.@{table-prefix-cls}-no-cell-bordered td,
+.@{table-prefix-cls}.@{table-prefix-cls}-no-cell-bordered th {
+    &:after {
+        border-right-width: 0;
+    }
+}
+
+.@{table-prefix-cls} tr td:last-child,
+.@{table-prefix-cls} tr th:last-child {
+    &:after {
+        border-right-width: 0;
+    }
+}
+
+.@{table-prefix-cls}.@{table-prefix-cls}-bordered tr td:last-child,
+.@{table-prefix-cls}.@{table-prefix-cls}-bordered tr th:last-child {
+    &:after {
+        border-right-width: 1px;
+    }
+}

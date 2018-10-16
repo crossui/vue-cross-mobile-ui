@@ -1,0 +1,33 @@
+@flexbox-prefix-cls: ~"@{vcu-prefix}-flexbox";
+.@{flexbox-prefix-cls} {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    display: -webkit-flex;
+    box-align: center;
+    align-items: center;
+    .@{flexbox-prefix-cls}-item {
+        flex: 1;
+        -webkit-flex: 1;
+        min-width: 20px;
+        width: 0%;
+        &:first-child {
+            margin-left: 0 !important;
+            margin-top: 0 !important;
+        }
+    }
+}
+
+.vcu-flex-row {
+    box-direction: row;
+    box-orient: horizontal;
+    flex-direction: row;
+}
+
+.vcu-flex-col {
+    box-orient: vertical;
+    flex-direction: column;
+    >.@{flexbox-prefix-cls}-item {
+        width: 100%;
+    }
+}
