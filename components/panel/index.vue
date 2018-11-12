@@ -11,17 +11,17 @@
             <div class="vcu-media-box__hd" v-if="item.src">
               <img class="vcu-media-box__thumb" :src="item.src" @error="onImgError(item, $event)" alt="">
             </div>
-              <div class="vcu-media-box__bd">
-                <h4 class="vcu-media-box__title" v-html="item.title"></h4>
-                <p class="vcu-media-box__desc" v-html="item.desc"></p>
-              </div>
+            <div class="vcu-media-box__bd">
+              <h4 class="vcu-media-box__title" v-html="item.title"></h4>
+              <div class="vcu-media-box__desc" v-html="item.desc"></div>
+            </div>
           </a>
         </template>
         <!--type==='2'-->
         <template v-if="type === '2'">
           <div class="vcu-media-box vcu-media-box_text" v-for="item in list" @click.prevent="onItemClick(item)">
             <h4 class="vcu-media-box__title" v-html="item.title"></h4>
-            <p class="vcu-media-box__desc" v-html="item.desc"></p>
+            <div class="vcu-media-box__desc" v-html="item.desc"></div>
           </div>
         </template>
         <!--type==='3'-->
@@ -32,10 +32,10 @@
                 <div class="vcu-cell__hd">
                   <img :src="item.src" alt="" @error="onImgError(item, $event)" style="width:20px;margin-right:5px;display:block">
                 </div>
-                  <div class="vcu-cell__bd">
-                    <p v-html="item.title"></p>
-                  </div>
-                  <span class="vcu-cell__ft"></span>
+                <div class="vcu-cell__bd">
+                  <div v-html="item.title"></div>
+                </div>
+                <span class="vcu-cell__ft"></span>
               </a>
             </div>
           </div>
@@ -44,7 +44,7 @@
         <template v-if="type === '4'">
           <div class="vcu-media-box vcu-media-box_text" v-for="item in list" @click.prevent="onItemClick(item)">
             <h4 class="vcu-media-box__title" v-html="item.title"></h4>
-            <p class="vcu-media-box__desc" v-html="item.desc"></p>
+            <div class="vcu-media-box__desc" v-html="item.desc"></div>
             <ul class="vcu-media-box__info" v-if="item.meta">
               <li class="vcu-media-box__info__meta" v-html="item.meta.source"></li>
               <li class="vcu-media-box__info__meta" v-html="item.meta.date"></li>
@@ -59,17 +59,29 @@
               <div class="vcu-media-box__hd" v-if="item.src">
                 <img class="vcu-media-box__thumb" @error="onImgError(item, $event)" :src="item.src" alt="">
               </div>
-                <div class="vcu-media-box__bd">
-                  <h4 class="vcu-media-box__title" v-html="item.title"></h4>
-                  <p class="vcu-media-box__desc" v-html="item.desc"></p>
-                </div>
+              <div class="vcu-media-box__bd">
+                <h4 class="vcu-media-box__title" v-html="item.title"></h4>
+                <div class="vcu-media-box__desc" v-html="item.desc"></div>
               </div>
-              <ul class="vcu-media-box__info" v-if="item.meta">
-                <li class="vcu-media-box__info__meta" v-html="item.meta.source"></li>
-                <li class="vcu-media-box__info__meta" v-html="item.meta.date"></li>
-                <li class="vcu-media-box__info__meta vcu-media-box__info__meta_extra" v-html="item.meta.other"></li>
-              </ul>
             </div>
+            <ul class="vcu-media-box__info" v-if="item.meta">
+              <li class="vcu-media-box__info__meta" v-html="item.meta.source"></li>
+              <li class="vcu-media-box__info__meta" v-html="item.meta.date"></li>
+              <li class="vcu-media-box__info__meta vcu-media-box__info__meta_extra" v-html="item.meta.other"></li>
+            </ul>
+          </div>
+        </template>
+        <!--type==='6'-->
+        <template v-if="type === '6'">
+          <a :href="getUrl(item.url)" v-for="item in list" @click.prevent="onItemClick(item)" class="vcu-media-box vcu-media-box_appmsg">
+            <div class="vcu-media-box__hd" v-if="item.label">
+              <div class="vcu-media-box__label" v-html="item.label"></div>
+            </div>
+            <div class="vcu-media-box__bd">
+              <h4 class="vcu-media-box__title" v-html="item.title"></h4>
+              <div class="vcu-media-box__desc" v-html="item.desc"></div>
+            </div>
+          </a>
         </template>
       </slot>
     </div>

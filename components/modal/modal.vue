@@ -65,6 +65,9 @@ export default {
       type: String,
       default: 'vcu-modal'
     },
+    cancel: {
+      type: Function
+    }
   },
   watch: {
     value(val) {
@@ -89,6 +92,7 @@ export default {
     close() {
       this.show = false
       this.$emit('input', false)
+      this.$emit('cancel', this.cancel)
     },
     handeleMaskClick() {
       if (this.clickOverlayClose) {

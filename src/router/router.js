@@ -11,6 +11,16 @@ export const home = {
         import ('@/demo/home.vue')
 };
 
+export const test = {
+    path: '/test',
+    name: 'test',
+    meta: {
+        title: '测试'
+    },
+    component: () =>
+        import ('@/demo/test.vue')
+};
+
 export const menuRouter = [{
         path: '/Basics',
         name: 'Basics',
@@ -490,5 +500,6 @@ export const menuRouter = [{
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
     home,
+    test,
     ...menuRouter
 ];
