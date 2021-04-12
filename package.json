@@ -50,7 +50,7 @@
         "gulp-rename": "^1.4.0",
         "gulp-replace-pro": "^1.0.1",
         "happypack": "^4.0.0",
-        "highlight.js": "^9.12.0",
+        "highlight.js": "^10.4.1",
         "html-webpack-plugin": "^2.30.1",
         "less": "^2.7.3",
         "less-loader": "^4.1.0",
