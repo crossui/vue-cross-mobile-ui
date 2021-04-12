@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import XInput from '../'
+import XInput from "../";
 
 export default {
   components: {
-    XInput
+    XInput,
   },
-  data () {
+  data() {
     return {
-      value: '13888888888'
-    }
-  }
-}
+      value: "13888888888",
+    };
+  },
+};
 </script>
 

@@ -1,35 +1,193 @@
 <template>
-  <div class="vcu-input-wrap vcu-cell" :class="{
-			'vcu-cell_warn': showWarn,
-			'disabled': disabled,
-			'vcu-input-has-right-full': hasRightFullHeightSlot
-		}">
+  <div
+    class="vcu-input-wrap vcu-cell"
+    :class="{
+      'vcu-cell_warn': showWarn,
+      disabled: disabled,
+      'vcu-input-has-right-full': hasRightFullHeightSlot,
+    }"
+  >
     <div class="vcu-cell__hd">
       <div :style="labelStyles" v-if="hasRestrictedLabel">
         <slot name="restricted-label"></slot>
       </div>
       <slot name="label">
-        <label class="vcu-label" :class="labelClass" :style="{width: labelWidth || $parent.labelWidth || labelWidthComputed, textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}" v-if="title" v-html="title" :for="`vcu-input-${uuid}`"></label>
+        <label
+          class="vcu-label"
+          :class="labelClass"
+          :style="{
+            width: labelWidth || $parent.labelWidth || labelWidthComputed,
+            textAlign: $parent.labelAlign,
+            marginRight: $parent.labelMarginRight,
+          }"
+          v-if="title"
+          v-html="title"
+          :for="`vcu-input-${uuid}`"
+        ></label>
         <inline-desc v-if="inlineDesc">{{ inlineDesc }}</inline-desc>
       </slot>
     </div>
-    <div class="vcu-cell__bd vcu-cell__primary" :class="placeholderAlign ? `vcu-input-placeholder-${placeholderAlign}` : ''">
-      <input :id="`vcu-input-${uuid}`" v-if="!type || type === 'text'" class="vcu-input" :maxlength="max" :autocomplete="autocomplete" :autocapitalize="autocapitalize" :autocorrect="autocorrect" :spellcheck="spellcheck" :style="inputStyle" type="text" :name="name" :pattern="pattern" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" v-model="currentValue" @focus="focusHandler" @blur="onBlur" @keyup="onKeyUp" ref="input" />
-      <input :id="`vcu-input-${uuid}`" v-if="type === 'number'" class="vcu-input" :maxlength="max" :autocomplete="autocomplete" :autocapitalize="autocapitalize" :autocorrect="autocorrect" :spellcheck="spellcheck" :style="inputStyle" type="number" :name="name" :pattern="pattern" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" v-model="currentValue" @focus="focusHandler" @blur="onBlur" @keyup="onKeyUp" ref="input" />
-      <input :id="`vcu-input-${uuid}`" v-if="type === 'email'" class="vcu-input" :maxlength="max" :autocomplete="autocomplete" :autocapitalize="autocapitalize" :autocorrect="autocorrect" :spellcheck="spellcheck" :style="inputStyle" type="email" :name="name" :pattern="pattern" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" v-model="currentValue" @focus="focusHandler" @blur="onBlur" @keyup="onKeyUp" ref="input" />
-      <input :id="`vcu-input-${uuid}`" v-if="type === 'password'" class="vcu-input" :maxlength="max" :autocomplete="autocomplete" :autocapitalize="autocapitalize" :autocorrect="autocorrect" :spellcheck="spellcheck" :style="inputStyle" type="password" :name="name" :pattern="pattern" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" v-model="currentValue" @focus="focusHandler" @blur="onBlur" @keyup="onKeyUp" ref="input" />
-      <input :id="`vcu-input-${uuid}`" v-if="type === 'tel'" class="vcu-input" :maxlength="max" :autocomplete="autocomplete" :autocapitalize="autocapitalize" :autocorrect="autocorrect" :spellcheck="spellcheck" :style="inputStyle" type="tel" :name="name" :pattern="pattern" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" v-model="currentValue" @focus="focusHandler" @blur="onBlur" @keyup="onKeyUp" ref="input" />
+    <div
+      class="vcu-cell__bd vcu-cell__primary"
+      :class="
+        placeholderAlign ? `vcu-input-placeholder-${placeholderAlign}` : ''
+      "
+    >
+      <input
+        :id="`vcu-input-${uuid}`"
+        v-if="!type || type === 'text'"
+        class="vcu-input"
+        :maxlength="max"
+        :autocomplete="autocomplete"
+        :autocapitalize="autocapitalize"
+        :autocorrect="autocorrect"
+        :spellcheck="spellcheck"
+        :style="inputStyle"
+        type="text"
+        :name="name"
+        :pattern="pattern"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        :disabled="disabled"
+        v-model="currentValue"
+        @focus="focusHandler"
+        @blur="onBlur"
+        @keyup="onKeyUp"
+        ref="input"
+      />
+      <input
+        :id="`vcu-input-${uuid}`"
+        v-if="type === 'number'"
+        class="vcu-input"
+        :maxlength="max"
+        :autocomplete="autocomplete"
+        :autocapitalize="autocapitalize"
+        :autocorrect="autocorrect"
+        :spellcheck="spellcheck"
+        :style="inputStyle"
+        type="number"
+        :name="name"
+        :pattern="pattern"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        :disabled="disabled"
+        v-model="currentValue"
+        @focus="focusHandler"
+        @blur="onBlur"
+        @keyup="onKeyUp"
+        ref="input"
+      />
+      <input
+        :id="`vcu-input-${uuid}`"
+        v-if="type === 'email'"
+        class="vcu-input"
+        :maxlength="max"
+        :autocomplete="autocomplete"
+        :autocapitalize="autocapitalize"
+        :autocorrect="autocorrect"
+        :spellcheck="spellcheck"
+        :style="inputStyle"
+        type="email"
+        :name="name"
+        :pattern="pattern"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        :disabled="disabled"
+        v-model="currentValue"
+        @focus="focusHandler"
+        @blur="onBlur"
+        @keyup="onKeyUp"
+        ref="input"
+      />
+      <input
+        :id="`vcu-input-${uuid}`"
+        v-if="type === 'password'"
+        class="vcu-input"
+        :maxlength="max"
+        :autocomplete="autocomplete"
+        :autocapitalize="autocapitalize"
+        :autocorrect="autocorrect"
+        :spellcheck="spellcheck"
+        :style="inputStyle"
+        type="password"
+        :name="name"
+        :pattern="pattern"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        :disabled="disabled"
+        v-model="currentValue"
+        @focus="focusHandler"
+        @blur="onBlur"
+        @keyup="onKeyUp"
+        ref="input"
+      />
+      <input
+        :id="`vcu-input-${uuid}`"
+        v-if="type === 'tel'"
+        class="vcu-input"
+        :maxlength="max"
+        :autocomplete="autocomplete"
+        :autocapitalize="autocapitalize"
+        :autocorrect="autocorrect"
+        :spellcheck="spellcheck"
+        :style="inputStyle"
+        type="tel"
+        :name="name"
+        :pattern="pattern"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        :disabled="disabled"
+        v-model="currentValue"
+        @focus="focusHandler"
+        @blur="onBlur"
+        @keyup="onKeyUp"
+        ref="input"
+      />
     </div>
     <div class="vcu-cell__ft">
-      <icon type="roundclosefill" v-show="!hasRightFullHeightSlot && !equalWith && showClear && currentValue !== '' && !readonly && !disabled && isFocus" @click.native="clear"></icon>
+      <icon
+        type="roundclosefill"
+        v-show="
+          !hasRightFullHeightSlot &&
+          !equalWith &&
+          showClear &&
+          currentValue !== '' &&
+          !readonly &&
+          !disabled &&
+          isFocus
+        "
+        @click.native="clear"
+      ></icon>
 
-      <icon @click.native="onClickErrorIcon" class="vcu-input-icon" type="warnfill" :title="!valid ? firstError : ''" v-show="showWarn"></icon>
-      <icon @click.native="onClickErrorIcon" class="vcu-input-icon" type="warnfill" v-if="!novalidate && hasLengthEqual && dirty && equalWith && !valid"></icon>
+      <icon
+        @click.native="onClickErrorIcon"
+        class="vcu-input-icon"
+        type="warnfill"
+        :title="!valid ? firstError : ''"
+        v-show="showWarn"
+      ></icon>
+      <icon
+        @click.native="onClickErrorIcon"
+        class="vcu-input-icon"
+        type="warnfill"
+        v-if="!novalidate && hasLengthEqual && dirty && equalWith && !valid"
+      ></icon>
 
-      <icon type="roundcheckfill" v-show="!novalidate && equalWith && equalWith === currentValue && valid"></icon>
+      <icon
+        type="roundcheckfill"
+        v-show="!novalidate && equalWith && equalWith === currentValue && valid"
+      ></icon>
 
-      <icon type="roundcheckfill" class="vcu-input-icon" v-show="novalidate && iconType === 'success'"></icon>
-      <icon type="warnfill" class="vcu-input-icon" v-show="novalidate && iconType === 'error'"></icon>
+      <icon
+        type="roundcheckfill"
+        class="vcu-input-icon"
+        v-show="novalidate && iconType === 'success'"
+      ></icon>
+      <icon
+        type="warnfill"
+        class="vcu-input-icon"
+        v-show="novalidate && iconType === 'error'"
+      ></icon>
 
       <slot name="right"></slot>
       <div v-if="hasRightFullHeightSlot" class="vcu-input-right-full">
@@ -37,90 +195,100 @@
       </div>
     </div>
 
-    <toast v-model="showErrorToast" type="text" width="auto" :time="600">{{ firstError }}</toast>
+    <toast v-model="showErrorToast" type="text" width="auto" :time="600">{{
+      firstError
+    }}</toast>
   </div>
 </template>
 
 <script>
-import Base from '../libs/base'
-import Icon from '../icon'
-import Toast from '../toast'
-import InlineDesc from '../inline-desc'
+import Base from "../libs/base";
+import Icon from "../icon";
+import Toast from "../toast";
+import InlineDesc from "../inline-desc";
 
-import isEmail from 'validator/lib/isEmail'
-import isMobilePhone from 'validator/lib/isMobilePhone'
+import isEmail from "validator/lib/isEmail";
+import isMobilePhone from "validator/lib/isMobilePhone";
 
-import Debounce from '../tools/debounce'
+import Debounce from "../tools/debounce";
 
-import mask from 'vanilla-masker'
+import mask from "vanilla-masker";
 
 const validators = {
-  'email': {
+  email: {
     fn: isEmail,
-    msg: '邮箱格式'
+    msg: "邮箱格式",
   },
-  'china-mobile': {
+  "china-mobile": {
     fn(str) {
-      return isMobilePhone(str, 'zh-CN')
+      return isMobilePhone(str, "zh-CN");
     },
-    msg: '手机号码'
+    msg: "手机号码",
   },
-  'china-name': {
+  "china-name": {
     fn(str) {
-      return str.length >= 2 && str.length <= 6
+      return str.length >= 2 && str.length <= 6;
     },
-    msg: '中文姓名'
-  }
-}
+    msg: "中文姓名",
+  },
+};
 export default {
-  name: 'VInput',
+  name: "VInput",
   created() {
-    this.currentValue = (this.value === undefined || this.value === null) ? '' : (this.mask ? this.maskValue(this.value) : this.value)
+    this.currentValue =
+      this.value === undefined || this.value === null
+        ? ""
+        : this.mask
+        ? this.maskValue(this.value)
+        : this.value;
     /* istanbul ignore if */
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       if (!this.title && !this.placeholder && !this.currentValue) {
-        console.warn('no title and no placeholder?')
+        console.warn("no title and no placeholder?");
       }
     }
 
-    if (this.required && (typeof this.currentValue === 'undefined' || this.currentValue === '')) {
-      this.valid = false
+    if (
+      this.required &&
+      (typeof this.currentValue === "undefined" || this.currentValue === "")
+    ) {
+      this.valid = false;
     }
-    this.handleChangeEvent = true
+    this.handleChangeEvent = true;
     if (this.debounce) {
       this._debounce = Debounce(() => {
-        this.$emit('on-change', this.currentValue)
-      }, this.debounce)
+        this.$emit("on-change", this.currentValue);
+      }, this.debounce);
     }
   },
   beforeMount() {
-    if (this.$slots && this.$slots['restricted-label']) {
-      this.hasRestrictedLabel = true
+    if (this.$slots && this.$slots["restricted-label"]) {
+      this.hasRestrictedLabel = true;
     }
-    if (this.$slots && this.$slots['right-full-height']) {
-      this.hasRightFullHeightSlot = true
+    if (this.$slots && this.$slots["right-full-height"]) {
+      this.hasRightFullHeightSlot = true;
     }
   },
   beforeDestroy() {
     if (this._debounce) {
-      this._debounce.cancel()
+      this._debounce.cancel();
     }
-    window.removeEventListener('resize', this.scrollIntoView)
+    window.removeEventListener("resize", this.scrollIntoView);
   },
   mixins: [Base],
   components: {
     Icon,
     InlineDesc,
-    Toast
+    Toast,
   },
   props: {
     title: {
       type: String,
-      default: ''
+      default: "",
     },
     type: {
       type: String,
-      default: 'text'
+      default: "text",
     },
     placeholder: String,
     value: [String, Number],
@@ -134,29 +302,29 @@ export default {
     max: Number,
     showClear: {
       type: Boolean,
-      default: true
+      default: true,
     },
     equalWith: String,
     textAlign: String,
     autocomplete: {
       type: String,
-      default: 'off'
+      default: "off",
     },
     autocapitalize: {
       type: String,
-      default: 'off'
+      default: "off",
     },
     autocorrect: {
       type: String,
-      default: 'off'
+      default: "off",
     },
     spellcheck: {
       type: String,
-      default: 'false'
+      default: "false",
     },
     novalidate: {
       type: Boolean,
-      default: false
+      default: false,
     },
     iconType: String,
     debounce: Number,
@@ -165,301 +333,325 @@ export default {
     mask: String,
     shouldToastError: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   computed: {
     labelStyles() {
       return {
-        width: this.labelWidthComputed || this.$parent.labelWidth || this.labelWidthComputed,
+        width:
+          this.labelWidthComputed ||
+          this.$parent.labelWidth ||
+          this.labelWidthComputed,
         textAlign: this.$parent.labelAlign,
-        marginRight: this.$parent.labelMarginRight
-      }
+        marginRight: this.$parent.labelMarginRight,
+      };
     },
     labelClass() {
       return {
-        'vcu-cell-justify': this.$parent.labelAlign === 'justify' || this.$parent.$parent.labelAlign === 'justify'
-      }
+        "vcu-cell-justify":
+          this.$parent.labelAlign === "justify" ||
+          this.$parent.$parent.labelAlign === "justify",
+      };
     },
     pattern() {
-      if (this.keyboard === 'number' || this.isType === 'china-mobile') {
-        return '[0-9]*'
+      if (this.keyboard === "number" || this.isType === "china-mobile") {
+        return "[0-9]*";
       }
     },
     labelWidthComputed() {
-      const width = this.title.replace(/[^x00-xff]/g, '00').length / 2 + 1
+      const width = this.title.replace(/[^x00-xff]/g, "00").length / 2 + 1;
       if (width < 10) {
-        return width + 'em'
+        return width + "em";
       }
     },
     hasErrors() {
-      return Object.keys(this.errors).length > 0
+      return Object.keys(this.errors).length > 0;
     },
     inputStyle() {
       if (this.textAlign) {
         return {
-          textAlign: this.textAlign
-        }
+          textAlign: this.textAlign,
+        };
       }
     },
     showWarn() {
-      return !this.novalidate && !this.equalWith && !this.valid && this.firstError && (this.touched || this.forceShowError)
-    }
+      return (
+        !this.novalidate &&
+        !this.equalWith &&
+        !this.valid &&
+        this.firstError &&
+        (this.touched || this.forceShowError)
+      );
+    },
   },
   mounted() {
-    window.addEventListener('resize', this.scrollIntoView)
+    window.addEventListener("resize", this.scrollIntoView);
   },
   methods: {
     scrollIntoView(time = 0) {
       if (/iphone/i.test(navigator.userAgent)) {
         // return
       }
-      if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+      if (
+        document.activeElement.tagName === "INPUT" ||
+        document.activeElement.tagName === "TEXTAREA"
+      ) {
         setTimeout(() => {
-          this.$refs.input.scrollIntoViewIfNeeded(true)
-        }, time)
+          this.$refs.input.scrollIntoViewIfNeeded(true);
+        }, time);
       }
     },
     onClickErrorIcon() {
       if (this.shouldToastError && this.firstError) {
-        this.showErrorToast = true
+        this.showErrorToast = true;
       }
-      this.$emit('on-click-error-icon', this.firstError)
+      this.$emit("on-click-error-icon", this.firstError);
     },
     maskValue(val) {
-      const val1 = this.mask ? mask.toPattern(val, this.mask) : val
-      return val1
+      const val1 = this.mask ? mask.toPattern(val, this.mask) : val;
+      return val1;
     },
-    reset(value = '') {
-      this.dirty = false
-      this.currentValue = value
-      this.firstError = ''
-      this.valid = true
+    reset(value = "") {
+      this.dirty = false;
+      this.currentValue = value;
+      this.firstError = "";
+      this.valid = true;
     },
     clear() {
-      this.currentValue = ''
-      this.focus()
-      this.$emit('on-click-clear-icon')
+      this.currentValue = "";
+      this.focus();
+      this.$emit("on-click-clear-icon");
     },
     focus() {
-      this.$refs.input.focus()
+      this.$refs.input.focus();
     },
     blur() {
-      this.$refs.input.blur()
+      this.$refs.input.blur();
     },
     focusHandler($event) {
-      this.$emit('on-focus', this.currentValue, $event)
-      this.isFocus = true
+      this.$emit("on-focus", this.currentValue, $event);
+      this.isFocus = true;
       // this.scrollIntoView(500)
       // this.scrollIntoView(5000)
       setTimeout(() => {
-        this.$refs.input.scrollIntoViewIfNeeded(false)
+        this.$refs.input.scrollIntoViewIfNeeded(false);
         // this.$refs.input.scrollIntoViewIfNeeded()
-      }, 1000)
+      }, 1000);
       // $event.target.
     },
     onBlur($event) {
-      this.setTouched()
-      this.validate()
-      this.isFocus = false
-      this.$emit('on-blur', this.currentValue, $event)
+      this.setTouched();
+      this.validate();
+      this.isFocus = false;
+      this.$emit("on-blur", this.currentValue, $event);
     },
     onKeyUp(e) {
-      if (e.key === 'Enter') {
-        e.target.blur()
-        this.$emit('on-enter', this.currentValue, e)
+      if (e.key === "Enter") {
+        e.target.blur();
+        this.$emit("on-enter", this.currentValue, e);
       }
     },
     getError() {
-      let key = Object.keys(this.errors)[0]
-      this.firstError = this.errors[key]
+      let key = Object.keys(this.errors)[0];
+      this.firstError = this.errors[key];
     },
     validate() {
-      if (typeof this.equalWith !== 'undefined') {
-        this.validateEqual()
-        return
+      if (typeof this.equalWith !== "undefined") {
+        this.validateEqual();
+        return;
       }
-      this.errors = {}
+      this.errors = {};
 
       if (!this.currentValue && !this.required) {
-        this.valid = true
-        return
+        this.valid = true;
+        return;
       }
 
       if (!this.currentValue && this.required) {
-        this.valid = false
-        this.errors.required = '必填哦'
-        this.getError()
-        return
+        this.valid = false;
+        this.errors.required = "必填哦";
+        this.getError();
+        return;
       }
 
-      if (typeof this.isType === 'string') {
-        const validator = validators[this.isType]
+      if (typeof this.isType === "string") {
+        const validator = validators[this.isType];
         if (validator) {
-          let value = this.currentValue
+          let value = this.currentValue;
 
-          if (this.isType === 'china-mobile' && this.mask === '999 9999 9999') {
-            value = this.currentValue.replace(/\s+/g, '')
+          if (this.isType === "china-mobile" && this.mask === "999 9999 9999") {
+            value = this.currentValue.replace(/\s+/g, "");
           }
 
-          this.valid = validator['fn'](value)
+          this.valid = validator["fn"](value);
           if (!this.valid) {
-            this.forceShowError = true
-            this.errors.format = validator['msg'] + '格式不对哦~'
-            this.getError()
-            return
+            this.forceShowError = true;
+            this.errors.format = validator["msg"] + "格式不对哦~";
+            this.getError();
+            return;
           } else {
-            delete this.errors.format
+            delete this.errors.format;
           }
         }
       }
 
-      if (typeof this.isType === 'function') {
-        const validStatus = this.isType(this.currentValue)
-        this.valid = validStatus.valid
+      if (typeof this.isType === "function") {
+        const validStatus = this.isType(this.currentValue);
+        this.valid = validStatus.valid;
         if (!this.valid) {
-          this.errors.format = validStatus.msg
-          this.forceShowError = true
-          this.getError()
-          return
+          this.errors.format = validStatus.msg;
+          this.forceShowError = true;
+          this.getError();
+          return;
         } else {
-          delete this.errors.format
+          delete this.errors.format;
         }
       }
 
       if (this.min) {
         if (this.currentValue.length < this.min) {
-          this.errors.min = `最少应该输入${this.min}个字符哦`
-          this.valid = false
-          this.getError()
-          return
+          this.errors.min = `最少应该输入${this.min}个字符哦`;
+          this.valid = false;
+          this.getError();
+          return;
         } else {
-          delete this.errors.min
+          delete this.errors.min;
         }
       }
 
       if (this.max) {
         if (this.currentValue.length > this.max) {
-          this.errors.max = `最多可以输入${this.max}个字符哦`
-          this.valid = false
-          this.forceShowError = true
-          return
+          this.errors.max = `最多可以输入${this.max}个字符哦`;
+          this.valid = false;
+          this.forceShowError = true;
+          return;
         } else {
-          this.forceShowError = false
-          delete this.errors.max
+          this.forceShowError = false;
+          delete this.errors.max;
         }
       }
 
-      this.valid = true
+      this.valid = true;
     },
     validateEqual() {
       if (!this.equalWith && this.currentValue) {
-        this.valid = false
-        this.errors.equal = '输入不一致'
-        return
+        this.valid = false;
+        this.errors.equal = "输入不一致";
+        return;
       }
-      let willCheck = this.dirty || this.currentValue.length >= this.equalWith.length
+      let willCheck =
+        this.dirty || this.currentValue.length >= this.equalWith.length;
       // 只在长度符合时显示正确与否
       if (willCheck && this.currentValue !== this.equalWith) {
-        this.valid = false
-        this.errors.equal = '输入不一致'
-        return
+        this.valid = false;
+        this.errors.equal = "输入不一致";
+        return;
       } else {
         if (!this.currentValue && this.required) {
-          this.valid = false
+          this.valid = false;
         } else {
-          this.valid = true
-          delete this.errors.equal
+          this.valid = true;
+          delete this.errors.equal;
         }
       }
     },
     // #2810
     _getInputMaskSelection(selection, direction, maskVal, loop) {
       if (!this.mask || (loop && direction === 0)) {
-        return selection
+        return selection;
       }
       if (direction === 0) {
-        direction = this.lastDirection
+        direction = this.lastDirection;
       }
       if (direction > 0) {
-        const maskChar = this.mask.substr(selection - direction, 1)
+        const maskChar = this.mask.substr(selection - direction, 1);
         if (!maskChar.match(/[9SA]/)) {
-          return this._getInputMaskSelection(selection + 1, direction, maskVal, true)
+          return this._getInputMaskSelection(
+            selection + 1,
+            direction,
+            maskVal,
+            true
+          );
         }
       }
-      return selection
-    }
+      return selection;
+    },
   },
   data() {
     return {
       hasRightFullHeightSlot: false,
       hasRestrictedLabel: false,
-      firstError: '',
+      firstError: "",
       forceShowError: false,
       hasLengthEqual: false,
       valid: true,
-      currentValue: '',
+      currentValue: "",
       showErrorToast: false,
-      isFocus: false
-    }
+      isFocus: false,
+    };
   },
   watch: {
     mask(val) {
       if (val && this.currentValue) {
-        this.currentValue = this.maskValue(this.currentValue)
+        this.currentValue = this.maskValue(this.currentValue);
       }
     },
     valid() {
-      this.getError()
+      this.getError();
     },
     value(val) {
-      this.currentValue = val
+      this.currentValue = val;
     },
     equalWith(newVal) {
       if (newVal && this.equalWith) {
         if (newVal.length === this.equalWith.length) {
-          this.hasLengthEqual = true
+          this.hasLengthEqual = true;
         }
-        this.validateEqual()
+        this.validateEqual();
       } else {
-        this.validate()
+        this.validate();
       }
     },
     currentValue(newVal, oldVal) {
       if (!this.equalWith && newVal) {
-        this.validateEqual()
+        this.validateEqual();
       }
       if (newVal && this.equalWith) {
         if (newVal.length === this.equalWith.length) {
-          this.hasLengthEqual = true
+          this.hasLengthEqual = true;
         }
-        this.validateEqual()
+        this.validateEqual();
       } else {
-        this.validate()
+        this.validate();
       }
 
-      let selection = this.$refs.input.selectionStart
-      let direction = newVal.length - oldVal.length
-      selection = this._getInputMaskSelection(selection, direction, this.maskValue(newVal))
-      this.lastDirection = direction
-      this.$emit('input', this.maskValue(newVal))
+      let selection = this.$refs.input.selectionStart;
+      let direction = newVal.length - oldVal.length;
+      selection = this._getInputMaskSelection(
+        selection,
+        direction,
+        this.maskValue(newVal)
+      );
+      this.lastDirection = direction;
+      this.$emit("input", this.maskValue(newVal));
       // #2810
       this.$nextTick(() => {
         if (this.$refs.input.selectionStart !== selection) {
-          this.$refs.input.selectionStart = selection
-          this.$refs.input.selectionEnd = selection
+          this.$refs.input.selectionStart = selection;
+          this.$refs.input.selectionEnd = selection;
         }
         if (this.currentValue !== this.maskValue(newVal)) {
-          this.currentValue = this.maskValue(newVal)
+          this.currentValue = this.maskValue(newVal);
         }
-      })
+      });
 
       if (this._debounce) {
-        this._debounce()
+        this._debounce();
       } else {
-        this.$emit('on-change', newVal)
+        this.$emit("on-change", newVal);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

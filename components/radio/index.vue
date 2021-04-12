@@ -1,6 +1,6 @@
 <template>
   <div class="vcu-cells_radio" :class="disabled ? 'vcu-radio-disabled' : ''">
-    <label class="vcu-cell vcu-cell_radio vcu-check__label" :for="`radio_${uuid}_${index}`" v-for="(one, index) in options">
+    <label class="vcu-cell vcu-cell_radio vcu-check__label" :for="`radio_${uuid}_${index}`" v-for="(one, index) in options" :key="index">
       <div class="vcu-cell__bd">
         <slot name="each-item" :icon="one.icon" :label="getValue(one)" :index="index" :selected="currentValue === getKey(one)">
           <p>

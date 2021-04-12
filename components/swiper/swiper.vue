@@ -1,70 +1,94 @@
 <template>
   <div class="vcu-slider">
-    <div class="vcu-swiper" :style="{height: xheight}">
+    <div class="vcu-swiper" :style="{ height: xheight }">
       <slot></slot>
 
-      <div class="vcu-swiper-item" v-for="(item, index) in list" @click="clickListItem(item)" :data-index="index">
+      <div
+        class="vcu-swiper-item"
+        v-for="(item, index) in list"
+        @click="clickListItem(item)"
+        :data-index="index"
+        :key="index"
+      >
         <a href="javascript:">
-          <div class="vcu-img" :style="{backgroundImage: buildBackgroundUrl(item)}"></div>
+          <div
+            class="vcu-img"
+            :style="{ backgroundImage: buildBackgroundUrl(item) }"
+          ></div>
           <p class="vcu-swiper-desc" v-if="showDescMask">{{ item.title }}</p>
         </a>
       </div>
 
-      <div v-if="listTwoLoopItem.length > 0" class="vcu-swiper-item vcu-swiper-item-clone" v-for="(item, index) in listTwoLoopItem" @click="clickListItem(item)" :data-index="index">
-        <a href="javascript:">
-          <div class="vcu-img" :style="{backgroundImage: buildBackgroundUrl(item)}"></div>
-          <p class="vcu-swiper-desc" v-if="showDescMask">{{ item.title }}</p>
-        </a>
-      </div>
-
+      <template v-if="listTwoLoopItem.length > 0">
+        <div
+          class="vcu-swiper-item vcu-swiper-item-clone"
+          v-for="(item, index) in listTwoLoopItem"
+          @click="clickListItem(item)"
+          :data-index="index"
+          :key="index"
+        >
+          <a href="javascript:">
+            <div
+              class="vcu-img"
+              :style="{ backgroundImage: buildBackgroundUrl(item) }"
+            ></div>
+            <p class="vcu-swiper-desc" v-if="showDescMask">{{ item.title }}</p>
+          </a>
+        </div>
+      </template>
     </div>
-    <div :class="[dotsClass, 'vcu-indicator', `vcu-indicator-${dotsPosition}`]" v-show="showDots">
-      <a href="javascript:" v-for="key in length">
-        <i class="vcu-icon-dot" :class="{'active': key - 1 === current}"></i>
+    <div
+      :class="[dotsClass, 'vcu-indicator', `vcu-indicator-${dotsPosition}`]"
+      v-show="showDots"
+    >
+      <a href="javascript:" v-for="(key, index) in length" :key="index">
+        <i class="vcu-icon-dot" :class="{ active: key - 1 === current }"></i>
       </a>
     </div>
   </div>
 </template>
 
 <script>
-import Swiper from './swiper.js'
-import { go } from '../libs/router'
+import Swiper from "./swiper.js";
+import { go } from "../libs/router";
 
 export default {
-  name: 'v-swiper',
+  name: "v-swiper",
   created() {
-    this.index = this.value || 0
+    this.index = this.value || 0;
     if (this.index) {
-      this.current = this.index
+      this.current = this.index;
     }
   },
   mounted() {
-    this.hasTwoLoopItem()
+    this.hasTwoLoopItem();
     this.$nextTick(() => {
       if (!(this.list && this.list.length === 0)) {
-        this.render(this.index)
+        this.render(this.index);
       }
-      this.xheight = this.getHeight()
-      this.$emit('on-get-height', this.xheight)
-    })
+      this.xheight = this.getHeight();
+      this.$emit("on-get-height", this.xheight);
+    });
   },
   methods: {
     hasTwoLoopItem() {
       if (this.list.length === 2 && this.loop) {
-        this.listTwoLoopItem = this.list
+        this.listTwoLoopItem = this.list;
       } else {
-        this.listTwoLoopItem = []
+        this.listTwoLoopItem = [];
       }
     },
     clickListItem(item) {
-      go(item.url, this.$router)
-      this.$emit('on-click-list-item', JSON.parse(JSON.stringify(item)))
+      go(item.url, this.$router);
+      this.$emit("on-click-list-item", JSON.parse(JSON.stringify(item)));
     },
     buildBackgroundUrl(item) {
-      return item.fallbackImg ? `url(${item.img}), url(${item.fallbackImg})` : `url(${item.img})`
+      return item.fallbackImg
+        ? `url(${item.img}), url(${item.fallbackImg})`
+        : `url(${item.img})`;
     },
     render(index = 0) {
-      this.swiper && this.swiper.destroy()
+      this.swiper && this.swiper.destroy();
       this.swiper = new Swiper({
         container: this.$el,
         direction: this.direction,
@@ -75,140 +99,138 @@ export default {
         duration: this.duration,
         height: this.height || this._height,
         minMovingDistance: this.minMovingDistance,
-        imgList: this.imgList
-      })
-        .on('swiped', (prev, index) => {
-          this.current = index % this.length
-          this.index = index % this.length
-        })
+        imgList: this.imgList,
+      }).on("swiped", (prev, index) => {
+        this.current = index % this.length;
+        this.index = index % this.length;
+      });
       if (index > 0) {
-        this.swiper.go(index)
+        this.swiper.go(index);
       }
     },
     rerender() {
       if (!this.$el || this.hasRender) {
-        return
+        return;
       }
-      this.hasRender = true
-      this.hasTwoLoopItem()
+      this.hasRender = true;
+      this.hasTwoLoopItem();
       this.$nextTick(() => {
-        this.index = this.value || 0
-        this.current = this.value || 0
-        this.length = this.list.length || this.$children.length
-        this.destroy()
-        this.render(this.value)
-      })
+        this.index = this.value || 0;
+        this.current = this.value || 0;
+        this.length = this.list.length || this.$children.length;
+        this.destroy();
+        this.render(this.value);
+      });
     },
     destroy() {
-      this.hasRender = false
-      this.swiper && this.swiper.destroy()
+      this.hasRender = false;
+      this.swiper && this.swiper.destroy();
     },
     getHeight() {
-      const hasHeight = parseInt(this.height, 10)
-      if (hasHeight) return this.height
+      const hasHeight = parseInt(this.height, 10);
+      if (hasHeight) return this.height;
       if (!hasHeight) {
         if (this.aspectRatio) {
-          return this.$el.offsetWidth * this.aspectRatio + 'px'
+          return this.$el.offsetWidth * this.aspectRatio + "px";
         }
-        return '180px'
+        return "180px";
       }
-    }
+    },
   },
   props: {
     list: {
       type: Array,
       default() {
-        return []
-      }
+        return [];
+      },
     },
     direction: {
       type: String,
-      default: 'horizontal'
+      default: "horizontal",
     },
     showDots: {
       type: Boolean,
-      default: true
+      default: true,
     },
     showDescMask: {
       type: Boolean,
-      default: true
+      default: true,
     },
     dotsPosition: {
       type: String,
-      default: 'right'
+      default: "right",
     },
     dotsClass: String,
     auto: Boolean,
     loop: Boolean,
     interval: {
       type: Number,
-      default: 3000
+      default: 3000,
     },
     threshold: {
       type: Number,
-      default: 50
+      default: 50,
     },
     duration: {
       type: Number,
-      default: 300
+      default: 300,
     },
     height: {
       type: String,
-      default: 'auto'
+      default: "auto",
     },
     aspectRatio: Number,
     minMovingDistance: {
       type: Number,
-      default: 0
+      default: 0,
     },
     value: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
       hasRender: false,
       current: this.index || 0,
-      xheight: 'auto',
+      xheight: "auto",
       length: this.list.length,
       index: 0,
-      listTwoLoopItem: [] // issue #1484
-    }
+      listTwoLoopItem: [], // issue #1484
+    };
   },
   watch: {
     auto(val) {
       if (!val) {
-        this.swiper && this.swiper.stop()
+        this.swiper && this.swiper.stop();
       } else {
-        this.swiper && this.swiper._auto()
+        this.swiper && this.swiper._auto();
       }
     },
     list(val, oldVal) {
       if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
-        this.rerender()
+        this.rerender();
       }
     },
     current(currentIndex) {
-      this.index = currentIndex
-      this.$emit('on-index-change', currentIndex)
+      this.index = currentIndex;
+      this.$emit("on-index-change", currentIndex);
     },
     index(val) {
-      const _this = this
+      const _this = this;
       if (val !== this.current) {
         this.$nextTick(() => {
-          _this.swiper && _this.swiper.go(val)
-        })
+          _this.swiper && _this.swiper.go(val);
+        });
       }
-      this.$emit('input', val)
+      this.$emit("input", val);
     },
     value(val) {
-      this.index = val
-    }
+      this.index = val;
+    },
   },
   beforeDestroy() {
-    this.destroy()
-  }
-}
-
+    this.destroy();
+  },
+};
 </script>

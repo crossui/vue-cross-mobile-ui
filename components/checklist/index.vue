@@ -3,16 +3,32 @@
     <div v-show="title" class="vcu-cells__title">{{ title }}</div>
     <slot name="after-title"></slot>
     <div class="vcu-cells vcu-cells_checkbox">
-      <label class="vcu-cell vcu-check_label" :class="{
-          'vcu-checklist-label-left': labelPosition === 'left'
-        }" :for="`checkbox_${uuid}_${index}`" v-for="(one, index) in currentOptions">
+      <label
+        class="vcu-cell vcu-check_label"
+        :class="{
+          'vcu-checklist-label-left': labelPosition === 'left',
+        }"
+        :for="`checkbox_${uuid}_${index}`"
+        v-for="(one, index) in currentOptions"
+        :key="index"
+      >
         <div class="vcu-cell__hd">
-          <input type="checkbox" class="vcu-check" :name="`vcu-checkbox-${uuid}`" :value="getKey(one)" v-model="currentValue" :id="disabled ? '' : `checkbox_${uuid}_${index}`" :disabled="isDisabled(getKey(one))">
+          <input
+            type="checkbox"
+            class="vcu-check"
+            :name="`vcu-checkbox-${uuid}`"
+            :value="getKey(one)"
+            v-model="currentValue"
+            :id="disabled ? '' : `checkbox_${uuid}_${index}`"
+            :disabled="isDisabled(getKey(one))"
+          />
           <i class="vcuicon vcu-icon-checked vcu-checklist-icon-checked"></i>
         </div>
         <div class="vcu-cell__bd">
           <p v-html="getValue(one)"></p>
-          <inline-desc v-if="getInlineDesc(one)">{{ getInlineDesc(one) }}</inline-desc>
+          <inline-desc v-if="getInlineDesc(one)">{{
+            getInlineDesc(one)
+          }}</inline-desc>
         </div>
       </label>
     </div>
@@ -21,23 +37,23 @@
 </template>
 
 <script>
-import Base from '../libs/base'
-import Tip from '../tip'
-import Icon from '../icon'
-import InlineDesc from '../inline-desc'
-import { getValue, getLabels, getKey, getInlineDesc } from './object-filter'
-import shuffle from 'array-shuffle'
+import Base from "../libs/base";
+import Tip from "../tip";
+import Icon from "../icon";
+import InlineDesc from "../inline-desc";
+import { getValue, getLabels, getKey, getInlineDesc } from "./object-filter";
+import shuffle from "array-shuffle";
 
 export default {
-  name: 'VChecklist',
+  name: "VChecklist",
   components: {
     Tip,
     Icon,
-    InlineDesc
+    InlineDesc,
   },
   filters: {
     getValue,
-    getKey
+    getKey,
   },
   mixins: [Base],
   props: {
@@ -46,15 +62,15 @@ export default {
     title: String,
     required: {
       type: Boolean,
-      default: false
+      default: false,
     },
     options: {
       type: Array,
-      required: true
+      required: true,
     },
     value: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     max: Number,
     min: Number,
@@ -62,43 +78,43 @@ export default {
     randomOrder: Boolean,
     checkDisabled: {
       type: Boolean,
-      default: true
+      default: true,
     },
     labelPosition: {
       type: String,
-      default: 'right'
+      default: "right",
     },
-    disabled: Boolean
+    disabled: Boolean,
   },
   data() {
     return {
       currentValue: [],
       currentOptions: this.options,
-      tempValue: '' // used only for radio mode
-    }
+      tempValue: "", // used only for radio mode
+    };
   },
   beforeUpdate() {
     if (this.isRadio) {
-      const length = this.currentValue.length
+      const length = this.currentValue.length;
       if (length > 1) {
-        this.currentValue = [this.currentValue[length - 1]]
+        this.currentValue = [this.currentValue[length - 1]];
       }
-      const val = pure(this.currentValue)
-      this.tempValue = val.length ? val[0] : ''
+      const val = pure(this.currentValue);
+      this.tempValue = val.length ? val[0] : "";
     }
   },
   created() {
-    this.handleChangeEvent = true
+    this.handleChangeEvent = true;
     if (this.value) {
-      this.currentValue = this.value
+      this.currentValue = this.value;
       if (this.isRadio) {
-        this.tempValue = this.isRadio ? this.value[0] : this.value
+        this.tempValue = this.isRadio ? this.value[0] : this.value;
       }
     }
     if (this.randomOrder) {
-      this.currentOptions = shuffle(this.options)
+      this.currentOptions = shuffle(this.options);
     } else {
-      this.currentOptions = this.options
+      this.currentOptions = this.options;
     }
   },
   methods: {
@@ -106,114 +122,123 @@ export default {
     getKey,
     getInlineDesc,
     getFullValue() {
-      const labels = getLabels(this.options, this.value)
+      const labels = getLabels(this.options, this.value);
       return this.currentValue.map((one, index) => {
         return {
           value: one,
-          label: labels[index]
-        }
-      })
+          label: labels[index],
+        };
+      });
     },
     isDisabled(key) {
       if (!this.checkDisabled) {
-        return false
+        return false;
       }
       if (this._max > 1) {
-        return this.currentValue.indexOf(key) === -1 && this.currentValue.length === this._max
+        return (
+          this.currentValue.indexOf(key) === -1 &&
+          this.currentValue.length === this._max
+        );
       }
-      return false
-    }
+      return false;
+    },
   },
   computed: {
     isRadio() {
-      if (typeof this.max === 'undefined') {
-        return false
+      if (typeof this.max === "undefined") {
+        return false;
       } else {
-        return this.max === 1
+        return this.max === 1;
       }
     },
     _total() {
-      return this.fillMode ? (this.options.length + 1) : this.options.length
+      return this.fillMode ? this.options.length + 1 : this.options.length;
     },
     _min() {
       if (!this.required && !this.min) {
-        return 0
+        return 0;
       }
       if (!this.required && this.min) {
-        return Math.min(this._total, this.min)
+        return Math.min(this._total, this.min);
       }
       if (this.required) {
         if (this.min) {
-          let max = Math.max(1, this.min)
-          return Math.min(this._total, max)
+          let max = Math.max(1, this.min);
+          return Math.min(this._total, max);
         } else {
-          return 1
+          return 1;
         }
       }
     },
     _max() {
       if (!this.required && !this.max) {
-        return this._total
+        return this._total;
       }
       if (this.max) {
         if (this.max > this._total) {
-          return this._total
+          return this._total;
         }
-        return this.max
+        return this.max;
       } else {
-        return this._total
+        return this._total;
       }
     },
     valid() {
-      return this.currentValue.length >= this._min && this.currentValue.length <= this._max
-    }
+      return (
+        this.currentValue.length >= this._min &&
+        this.currentValue.length <= this._max
+      );
+    },
   },
   watch: {
     tempValue(val) {
-      const _val = val ? [val] : []
-      this.$emit('input', _val)
-      this.$emit('on-change', _val, getLabels(this.options, _val))
+      const _val = val ? [val] : [];
+      this.$emit("input", _val);
+      this.$emit("on-change", _val, getLabels(this.options, _val));
     },
     value(newVal) {
       if (JSON.stringify(newVal) !== JSON.stringify(this.currentValue)) {
-        this.currentValue = newVal
+        this.currentValue = newVal;
       }
     },
     options(val) {
-      this.currentOptions = val
+      this.currentOptions = val;
     },
     currentValue(newVal) {
-      const val = pure(newVal)
+      const val = pure(newVal);
 
       if (!this.isRadio) {
-        this.$emit('input', val)
-        this.$emit('on-change', val, getLabels(this.options, val))
-        let err = {}
+        this.$emit("input", val);
+        this.$emit("on-change", val, getLabels(this.options, val));
+        let err = {};
         if (this._min) {
           if (this.required) {
             if (this.currentValue.length < this._min) {
               err = {
-                min: this._min
-              }
+                min: this._min,
+              };
             }
           } else {
-            if (this.currentValue.length && this.currentValue.length < this._min) {
+            if (
+              this.currentValue.length &&
+              this.currentValue.length < this._min
+            ) {
               err = {
-                min: this._min
-              }
+                min: this._min,
+              };
             }
           }
         }
         if (!this.valid && this.dirty && Object.keys(err).length) {
-          this.$emit('on-error', err)
+          this.$emit("on-error", err);
         } else {
-          this.$emit('on-clear-error')
+          this.$emit("on-clear-error");
         }
       }
-    }
-  }
-}
+    },
+  },
+};
 function pure(obj) {
-  return JSON.parse(JSON.stringify(obj))
+  return JSON.parse(JSON.stringify(obj));
 }
 </script>

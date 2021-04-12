@@ -1,52 +1,57 @@
 <template>
-  <input class="inline-switch vcu-switch" type="checkbox" :disabled="disabled" v-model="currentValue" />
+  <input
+    class="inline-switch vcu-switch"
+    type="checkbox"
+    :disabled="disabled"
+    v-model="currentValue"
+  />
 </template>
 
 <script>
 export default {
-  name: 'VInlineSwitch',
+  name: "VInlineSwitch",
   methods: {
     toBoolean(val) {
       if (!this.valueMap) {
-        return val
+        return val;
       } else {
-        const index = this.valueMap.indexOf(val)
-        return index === 1
+        const index = this.valueMap.indexOf(val);
+        return index === 1;
       }
     },
     toRaw(val) {
       if (!this.valueMap) {
-        return val
+        return val;
       } else {
-        return this.valueMap[val ? 1 : 0]
+        return this.valueMap[val ? 1 : 0];
       }
-    }
+    },
   },
   props: {
     disabled: Boolean,
     value: {
       type: [Boolean, String, Number],
-      default: false
+      default: false,
     },
     valueMap: {
       type: Array,
-      default: () => ([false, true])
-    }
+      default: () => [false, true],
+    },
   },
   data() {
     return {
-      currentValue: this.toBoolean(this.value)
-    }
+      currentValue: this.toBoolean(this.value),
+    };
   },
   watch: {
     currentValue(val) {
-      const rawValue = this.toRaw(val)
-      this.$emit('input', rawValue)
-      this.$emit('on-change', rawValue)
+      const rawValue = this.toRaw(val);
+      this.$emit("input", rawValue);
+      this.$emit("on-change", rawValue);
     },
     value(val) {
-      this.currentValue = this.toBoolean(val)
-    }
-  }
-}
+      this.currentValue = this.toBoolean(val);
+    },
+  },
+};
 </script>

@@ -1,5 +1,11 @@
 <template>
-  <a class="vcu-datetime vcu-cell" :class="{'vcu-cell_access': !readonly}" data-cancel-text="取消" data-confirm-text="确定" href="javascript:">
+  <a
+    class="vcu-datetime vcu-cell"
+    :class="{ 'vcu-cell_access': !readonly }"
+    data-cancel-text="取消"
+    data-confirm-text="确定"
+    href="javascript:"
+  >
     <slot>
       <div>
         <slot name="title">
@@ -7,49 +13,70 @@
         </slot>
         <inline-desc v-if="inlineDesc">{{ inlineDesc }}</inline-desc>
       </div>
-      <div class="vcu-cell__ft vcu-cell-primary vcu-datetime-value" :style="{
-          textAlign: valueTextAlign
-        }">
-        <span class="vcu-cell-placeholder" v-if="!currentValue && placeholder">{{ placeholder }}</span>
-        <span class="vcu-cell-value" v-if="currentValue">{{ displayFormat ? displayFormat(currentValue) : currentValue }}</span>
-        <icon class="vcu-input-icon" type="warn" v-show="!valid" :title="firstError"></icon>
+      <div
+        class="vcu-cell__ft vcu-cell-primary vcu-datetime-value"
+        :style="{
+          textAlign: valueTextAlign,
+        }"
+      >
+        <span
+          class="vcu-cell-placeholder"
+          v-if="!currentValue && placeholder"
+          >{{ placeholder }}</span
+        >
+        <span class="vcu-cell-value" v-if="currentValue">{{
+          displayFormat ? displayFormat(currentValue) : currentValue
+        }}</span>
+        <icon
+          class="vcu-input-icon"
+          type="warn"
+          v-show="!valid"
+          :title="firstError"
+        ></icon>
       </div>
     </slot>
   </a>
 </template>
 
 <script>
-import Icon from '../icon'
-import Picker from './datetimepicker'
-import Group from '../group'
-import InlineDesc from '../inline-desc'
-import Uuid from '../mixins/uuid'
-import format from '../tools/date/format'
+import Icon from "../icon";
+import Picker from "./datetimepicker";
+import Group from "../group";
+import InlineDesc from "../inline-desc";
+import Uuid from "../mixins/uuid";
+import format from "../tools/date/format";
 
 export default {
-  name: 'VDatetime',
+  name: "VDatetime",
   mixins: [Uuid],
   components: {
     Group,
     InlineDesc,
-    Icon
+    Icon,
   },
   props: {
     format: {
       type: String,
-      default: 'YYYY-MM-DD',
+      default: "YYYY-MM-DD",
       validator(val) {
         /* istanbul ignore if */
-        if (process.env.NODE_ENV === 'development' && val && /A/.test(val) && val !== 'YYYY-MM-DD A') {
-          return console.error('[vcu] Datetime prop:format 使用 A 时只允许的值为： YYYY-MM-DD A')
+        if (
+          process.env.NODE_ENV === "development" &&
+          val &&
+          /A/.test(val) &&
+          val !== "YYYY-MM-DD A"
+        ) {
+          return console.error(
+            "[vcu] Datetime prop:format 使用 A 时只允许的值为： YYYY-MM-DD A"
+          );
         }
-        return true
-      }
+        return true;
+      },
     },
     title: String,
     value: {
       type: String,
-      default: ''
+      default: "",
     },
     inlineDesc: String,
     placeholder: String,
@@ -60,55 +87,65 @@ export default {
     clearText: String,
     yearRow: {
       type: String,
-      default: '{value}'
+      default: "{value}",
     },
     monthRow: {
       type: String,
-      default: '{value}'
+      default: "{value}",
     },
     dayRow: {
       type: String,
-      default: '{value}'
+      default: "{value}",
     },
     hourRow: {
       type: String,
-      default: '{value}'
+      default: "{value}",
     },
     minuteRow: {
       type: String,
-      default: '{value}'
+      default: "{value}",
     },
     required: {
       type: Boolean,
-      default: false
+      default: false,
     },
     minHour: {
       type: Number,
-      default: 0
+      default: 0,
     },
     maxHour: {
       type: Number,
-      default: 23
+      default: 23,
     },
     startDate: {
       type: String,
       validator(val) {
         /* istanbul ignore if */
-        if (process.env.NODE_ENV === 'development' && val && val.length !== 10) {
-          console.error('[vcu] Datetime prop:start-date 必须为 YYYY-MM-DD 格式')
+        if (
+          process.env.NODE_ENV === "development" &&
+          val &&
+          val.length !== 10
+        ) {
+          console.error(
+            "[vcu] Datetime prop:start-date 必须为 YYYY-MM-DD 格式"
+          );
         }
-        return val ? val.length === 10 : true
-      }
+        return val ? val.length === 10 : true;
+      },
     },
     endDate: {
       type: String,
       validator(val) {
         /* istanbul ignore if */
-        if (process.env.NODE_ENV === 'development' && val && val.length !== 10) {
-          console.error('[vcu] Datetime prop:end-date 必须为 YYYY-MM-DD 格式')
+        if (
+          process.env.NODE_ENV === "development" &&
+          val &&
+          val.length !== 10
+        ) {
+          console.error("[vcu] Datetime prop:end-date 必须为 YYYY-MM-DD 格式");
         }
-        return val ? val.length === 10 : true
-      }
+        return val ? val.length === 10 : true;
+      },
     },
     valueTextAlign: String,
     displayFormat: Function,
@@ -119,55 +156,55 @@ export default {
     defaultSelectedValue: String,
     computeHoursFunction: Function,
     computeDaysFunction: Function,
-    orderMap: Object
+    orderMap: Object,
   },
   created() {
-    this.isFirstSetValue = false
-    this.currentValue = this.value
+    this.isFirstSetValue = false;
+    this.currentValue = this.value;
   },
   data() {
     return {
       currentShow: false,
       currentValue: null,
       valid: true,
-      errors: {}
-    }
+      errors: {},
+    };
   },
   mounted() {
-    const uuid = this.uuid
-    this.$el.setAttribute('id', `vcu-datetime-${uuid}`)
+    const uuid = this.uuid;
+    this.$el.setAttribute("id", `vcu-datetime-${uuid}`);
     if (!this.readonly) {
       this.$nextTick(() => {
-        this.render()
+        this.render();
 
         if (this.show) {
           this.$nextTick(() => {
-            this.picker && this.picker.show(this.currentValue)
-          })
+            this.picker && this.picker.show(this.currentValue);
+          });
         }
-      })
+      });
     }
   },
   computed: {
     styles() {
       if (!this.$parent) {
-        return {}
+        return {};
       }
       return {
         width: this.$parent.labelWidth,
         textAlign: this.$parent.labelAlign,
-        marginRight: this.$parent.labelMarginRight
-      }
+        marginRight: this.$parent.labelMarginRight,
+      };
     },
     pickerOptions() {
-      const _this = this
+      const _this = this;
       const options = {
-        trigger: '#vcu-datetime-' + this.uuid,
+        trigger: "#vcu-datetime-" + this.uuid,
         format: this.format,
         value: this.currentValue,
-        output: '.vcu-datetime-value',
-        confirmText: _this.getButtonText('confirm'),
-        cancelText: _this.getButtonText('cancel'),
+        output: ".vcu-datetime-value",
+        confirmText: _this.getButtonText("confirm"),
+        cancelText: _this.getButtonText("cancel"),
         clearText: _this.clearText,
         yearRow: this.yearRow,
         monthRow: this.monthRow,
@@ -186,136 +223,138 @@ export default {
         orderMap: this.orderMap || {},
         onSelect(type, val, wholeValue) {
           if (_this.picker && _this.picker.config.renderInline) {
-            _this.$emit('input', wholeValue)
-            _this.$emit('on-change', wholeValue)
+            _this.$emit("input", wholeValue);
+            _this.$emit("on-change", wholeValue);
           }
         },
         onConfirm(value) {
-          _this.currentValue = value
+          _this.currentValue = value;
         },
         onClear(value) {
-          _this.$emit('on-clear', value)
+          _this.$emit("on-clear", value);
         },
         onHide(type) {
-          _this.currentShow = false
-          _this.$emit('update:show', false)
-          _this.validate()
-          _this.$emit('on-hide', type)
-          if (type === 'cancel') {
-            _this.$emit('on-cancel')
+          _this.currentShow = false;
+          _this.$emit("update:show", false);
+          _this.validate();
+          _this.$emit("on-hide", type);
+          if (type === "cancel") {
+            _this.$emit("on-cancel");
           }
-          if (type === 'confirm') {
+          if (type === "confirm") {
             setTimeout(() => {
               _this.$nextTick(() => {
-                _this.$emit('on-confirm', _this.value)
-              })
-            })
+                _this.$emit("on-confirm", _this.value);
+              });
+            });
           }
         },
         onShow() {
-          _this.currentShow = true
-          _this.$emit('update:show', true)
-          _this.$emit('on-show')
-        }
-      }
+          _this.currentShow = true;
+          _this.$emit("update:show", true);
+          _this.$emit("on-show");
+        },
+      };
       if (this.minYear) {
-        options.minYear = this.minYear
+        options.minYear = this.minYear;
       }
       if (this.maxYear) {
-        options.maxYear = this.maxYear
+        options.maxYear = this.maxYear;
       }
-      return options
+      return options;
     },
     firstError() {
-      let key = Object.keys(this.errors)[0]
-      return this.errors[key]
+      let key = Object.keys(this.errors)[0];
+      return this.errors[key];
     },
     labelClass() {
       if (!this.$parent) {
-        return {}
+        return {};
       }
       return {
-        'vcu-cell-justify': this.$parent.labelAlign === 'justify' || this.$parent.$parent.labelAlign === 'justify'
-      }
-    }
+        "vcu-cell-justify":
+          this.$parent.labelAlign === "justify" ||
+          this.$parent.$parent.labelAlign === "justify",
+      };
+    },
   },
   methods: {
     getButtonText(type) {
-      if (type === 'cancel' && this.cancelText) {
-        return this.cancelText
-      } else if (type === 'confirm' && this.confirmText) {
-        return this.confirmText
+      if (type === "cancel" && this.cancelText) {
+        return this.cancelText;
+      } else if (type === "confirm" && this.confirmText) {
+        return this.confirmText;
       }
-      return this.$el.getAttribute(`data-${type}-text`)
+      return this.$el.getAttribute(`data-${type}-text`);
     },
     render() {
       this.$nextTick(() => {
-        this.picker && this.picker.destroy()
-        this.picker = new Picker(this.pickerOptions)
-      })
+        this.picker && this.picker.destroy();
+        this.picker = new Picker(this.pickerOptions);
+      });
     },
     validate() {
       if (!this.currentValue && this.required) {
-        this.valid = false
-        this.errors.required = '必填'
-        return
+        this.valid = false;
+        this.errors.required = "必填";
+        return;
       }
-      this.valid = true
-      this.errors = {}
-    }
+      this.valid = true;
+      this.errors = {};
+    },
   },
   watch: {
     readonly(val) {
       if (val) {
-        this.picker && this.picker.destroy()
+        this.picker && this.picker.destroy();
       } else {
-        this.render()
+        this.render();
       }
     },
     show(val) {
-      if (val === this.currentShow) return
+      if (val === this.currentShow) return;
       if (val) {
-        this.picker && this.picker.show(this.currentValue)
+        this.picker && this.picker.show(this.currentValue);
       } else {
-        this.picker && this.picker.hide(this.currentValue)
+        this.picker && this.picker.hide(this.currentValue);
       }
     },
     currentValue(val, oldVal) {
-      this.$emit('input', val)
+      this.$emit("input", val);
       if (!this.isFirstSetValue) {
-        this.isFirstSetValue = true
-        oldVal && this.$emit('on-change', val)
+        this.isFirstSetValue = true;
+        oldVal && this.$emit("on-change", val);
       } else {
-        this.$emit('on-change', val)
+        this.$emit("on-change", val);
       }
-      this.validate()
+      this.validate();
     },
     startDate() {
-      this.render()
+      this.render();
     },
     endDate() {
-      this.render()
+      this.render();
     },
     format(val) {
       if (this.currentValue) {
-        this.currentValue = format(this.currentValue, val)
+        this.currentValue = format(this.currentValue, val);
       }
-      this.render()
+      this.render();
     },
     value(val) {
       // do not force render when renderInline is true
       if (this.readonly || (this.picker && this.picker.config.renderInline)) {
-        this.currentValue = val
-        return
+        this.currentValue = val;
+        return;
       }
       if (this.currentValue !== val) {
-        this.currentValue = val
-        this.render()
+        this.currentValue = val;
+        this.render();
       }
-    }
+    },
   },
   beforeDestroy() {
-    this.picker && this.picker.destroy()
-  }
-}
+    this.picker && this.picker.destroy();
+  },
+};
 </script>
